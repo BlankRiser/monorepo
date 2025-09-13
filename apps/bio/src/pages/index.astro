@@ -3,22 +3,70 @@ import "../styles/global.css";
 import { ProfileCard } from "../components/profile-card";
 import { BackgroundShaders } from "../components/background-shaders";
 
-const PAGE_TITLE = "Ram Shanakar";
-const PAGE_DESCRIPTION = "Ram Shanakar's bio page";
+const SITE_URL = "https://bio.ram.codes";
+const SITE_DOMAIN = "bio.ram.codes";
+
+const PAGE_TITLE = "Ram Shankar";
+const PAGE_DESCRIPTION =
+  "Code to scale, design with flair — I build products with end-to-end care | Ram Shankar";
+const PAGE_KEYWORDS = [
+  "Ram Shankar Choudhary",
+  "Ram",
+  "Shankar",
+  "Choudhary",
+  "Senior Software Engineer",
+  "Software Engineer",
+  "Full-Stack Developer",
+  "Frontend Developer",
+  "Web Developer",
+  "Backend Developer",
+  "TypeScript",
+  "JavaScript",
+  "Python",
+  "React",
+  "Node.js",
+  "Deno",
+  "Bun",
+  "CSS",
+  "HTML",
+  "portfolio",
+  "bio",
+  "Tech Enthusiast",
+  "Open Source Contributor",
+  "ram.codes",
+];
+
+const OPEN_GRAPH_IMAGE = "/assets/og_image.webp";
 ---
 
 <html lang="en" class="h-full">
   <head>
     <title>{PAGE_TITLE}</title>
-    <meta charset="utf-8" />
-    <meta name="robots" content="follow, index" />
     <meta name="description" content={PAGE_DESCRIPTION} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="robots" content="follow, index" />
+
+    <link rel="canonical" href={SITE_URL} />
+    <meta name="theme-color" content="var(--color-blue-950)" />
+    <meta name="keywords" content={PAGE_KEYWORDS.join(", ")} />
+
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:type" content="website" />
     <meta property="og:description" content={PAGE_DESCRIPTION} />
     <meta property="og:title" content={PAGE_TITLE} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
+    <meta property="og:image" content={OPEN_GRAPH_IMAGE} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content={SITE_DOMAIN} />
+    <meta property="twitter:url" content={SITE_URL} />
+    <meta name="twitter:title" content={PAGE_TITLE} />
+    <meta name="twitter:description" content={PAGE_DESCRIPTION} />
+    <meta name="twitter:image" content={OPEN_GRAPH_IMAGE} />
+
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="var(--color-blue-950)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
