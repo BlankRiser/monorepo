@@ -21,7 +21,7 @@ const about = {
 
 export const ProfileCard = () => {
   return (
-    <div className="bg-blue-950 md:rounded-3xl overflow-hidden shadow shadow-blue-950 w-full md:max-w-lg h-dvh md:h-[90dvh] flex flex-col">
+    <div className="bg-blue-950 md:rounded-3xl overflow-hidden w-full md:max-w-lg h-dvh md:h-[90dvh] flex flex-col">
       <div className="relative [background-image:url(/assets/ram.webp)] bg-cover bg-no-repeat bg-center md:bg-top bg-blue-950 color-blue-950 h-full">
         <div className="absolute bottom-0 flex flex-col justify-end h-full w-full p-4 text-blue-50 bg-[linear-gradient(0deg,var(--color-blue-950)_0%,rgba(45,222,253,0.04)_60%)]">
           <h1

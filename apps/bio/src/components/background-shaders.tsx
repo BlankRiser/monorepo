@@ -6,7 +6,7 @@ const SPEED = 1;
 
 export function BackgroundShaders({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full h-screen bg-blue-950 relative overflow-hidden hidden md:block">
+    <div className="w-full h-screen bg-blue-950 relative overflow-hidden">
       <MeshGradient
         className="w-full h-full absolute inset-0"
         // colors={["#000000", "#1a1a1a", "#333333", "#ffffff"]}
