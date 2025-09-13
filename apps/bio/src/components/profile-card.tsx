@@ -146,7 +146,7 @@ const SocialLinks = () => {
             href={value}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-serif text-blue-950 px-2 py-4 bg-orange-200 hover:bg-blue-200 rounded-full text-center text-4xl "
+            className="font-serif text-blue-950 p-2 bg-orange-200 hover:bg-blue-200 rounded-full text-center text-4xl "
           >
             {key.charAt(0).toUpperCase() + key.slice(1)}
           </a>
