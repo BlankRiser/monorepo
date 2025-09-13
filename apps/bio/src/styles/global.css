@@ -1,1 +1,6 @@
 @import "@workspace/ui/globals.css";
+
+@theme {
+  --font-sans: "Instrument Sans", sans-serif;
+  --font-serif: "Instrument Serif", serif;
+}

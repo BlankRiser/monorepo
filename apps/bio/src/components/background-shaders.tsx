@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { MeshGradient, DotOrbit } from "@paper-design/shaders-react";
-import { ProfileCard } from "./profile-card";
+import { MeshGradient } from "@paper-design/shaders-react";
 
 const SPEED = 1;
 
@@ -30,7 +28,7 @@ export function BackgroundShaders({ children }: { children: React.ReactNode }) {
         />
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center z-100">
+      <div className="absolute inset-0 grid place-items-center overflow-scroll md:p-4">
         {children}
       </div>
     </div>
