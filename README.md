@@ -1,31 +1,9 @@
 # monorepo
 
-This template is for creating a monorepo with shadcn/ui.
+This monorepo contains multiple projects built with different frameworks including Astro, Next.js, and Vite. Each project is organized in its own directory within the repository. The goal is to simplify development, reduce duplication, and make it easier to maintain and update my personal web presence.
 
-## Usage
+## Projects
 
-```bash
-pnpm dlx shadcn@latest init
-```
+- **bio**: Built with [Astro](https://astro.build/). Located in the `bio` directory.
+- **portfolio** (WIP): Built with [Next.js](https://nextjs.org/). Located in the `portfolio` directory.
 
-## Adding components
-
-To add components to your app, run the following command at the root of your `portfolio` app:
-
-```bash
-pnpm dlx shadcn@latest add button -c apps/portfolio
-```
-
-This will place the ui components in the `packages/ui/src/components` directory.
-
-## Tailwind
-
-Your `tailwind.config.ts` and `globals.css` are already set up to use the components from the `ui` package.
-
-## Using components
-
-To use the components in your app, import them from the `ui` package.
-
-```tsx
-import { Button } from "@workspace/ui/components/button"
-```
