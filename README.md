@@ -1,4 +1,4 @@
-# shadcn/ui monorepo template
+# monorepo
 
 This template is for creating a monorepo with shadcn/ui.
 
