@@ -1,0 +1,28 @@
+---
+author: Ram
+title: Zustand and MMKV middleware
+date: 2024-05-21
+description: Middleware to persist Zustand state to MMKV
+image: "/images/blog/workstation.jpeg"
+draft: true
+toc: false
+---
+
+```ts title="zustand-mmkv-middleware.ts" 
+export const persistMemStore = new MMKV({
+  id: 'zustand-mmkv-middleware',
+});
+
+const zustandMiddleWare: StateStorage = {
+  setItem: (name: string, value: string) => {
+    return persistMemStore.set(name, value);
+  },
+  getItem: (name: string) => {
+    const value = persistMemStore.getString(name);
+    return value ?? null;
+  },
+  removeItem: (name: string) => {
+    return persistMemStore.delete(name);
+  },
+};
+```
