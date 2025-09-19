@@ -62,6 +62,7 @@ export default async function Page(props: PageProps<"/blog/[slug]">) {
               ).toDateString()}
             </p>
           </div>
+          <div></div>
           {/* <Control url={page.url} /> */}
         </div>
       </article>
@@ -84,7 +85,9 @@ export async function generateMetadata(
 }
 
 export function generateStaticParams(): { slug: string }[] {
-  return blogSource.getPages().map((page) => ({
-    slug: page.slugs[0],
+  const slugs = blogSource.getPages().map((page) => ({
+    slug: page.slugs[0]!,
   }));
+
+  return slugs;
 }

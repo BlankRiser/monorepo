@@ -6,4 +6,5 @@ This monorepo contains multiple projects built with different frameworks includi
 
 - **bio**: Built with [Astro](https://astro.build/). Located in the `bio` directory.
 - **portfolio** (WIP): Built with [Next.js](https://nextjs.org/). Located in the `portfolio` directory.
+- **blog** (WIP): Built with [Next.js](https://nextjs.org/) and [fumadocs](https://fumadocs.dev/). Located in the `blog` directory.
 

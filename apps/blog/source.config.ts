@@ -1,3 +1,4 @@
+import { rehypeCodeDefaultOptions } from "fumadocs-core/mdx-plugins";
 import {
   defineCollections,
   defineConfig,
@@ -5,7 +6,7 @@ import {
   frontmatterSchema,
   metaSchema
 } from "fumadocs-mdx/config";
-
+import { transformerTwoslash } from "fumadocs-twoslash";
 import z from "zod";
 
 // You can customise Zod schemas for frontmatter and `meta.json` here
@@ -14,7 +15,7 @@ export const docs = defineDocs({
   docs: {
     schema: frontmatterSchema.extend({
       author: z.string(),
-      date: z.string().date().or(z.date()),
+      date: z.iso.date().or(z.date()),
     }),
   },
   meta: {
@@ -57,6 +58,10 @@ export default defineConfig({
         light: "catppuccin-latte",
         dark: "catppuccin-mocha",
       },
+      transformers: [
+        ...(rehypeCodeDefaultOptions.transformers ?? []),
+        transformerTwoslash(),
+      ],
     },
   },
 });

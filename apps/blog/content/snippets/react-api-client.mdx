@@ -9,7 +9,7 @@ toc: false
 ---
 
 
-```ts title="api-client.ts"
+```ts  title="api-client.ts" lineNumbers
 type ApiClientConstructor = {
   baseURL: string;
   authToken: string | null;
@@ -91,18 +91,18 @@ export const apiClient = new APIClient({
 ```
 
 
-```tsx title="Example usage in React"
+```tsx title="Example usage in React" lineNumbers
 useEffect(() => {
   const controller = new AbortController();
   
-  apiClient
-    .get<RootObject>(
-      'https://api.restful-api.dev/objects/4',
-      controller.signal,
-    )
-    .then((res) => {
-      console.log(res); 
-    });
+  apiClient // [!code focus]
+    .get<RootObject>( // [!code focus]
+      'https://api.restful-api.dev/objects/4', // [!code focus]
+      controller.signal, // [!code focus]
+    ) // [!code focus]
+    .then((res) => { // [!code focus]
+      console.log(res);  // [!code focus]
+    }); // [!code focus]
 
   return () => {
     controller.abort();

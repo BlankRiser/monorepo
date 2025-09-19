@@ -8,15 +8,16 @@ draft: false
 toc: false
 ---
 
-
-```jsx title="useState"
+```tsx title="useState" 
+import * as React from "react";
 import { useState } from "react";
-function Counter({ initialCount }) {
-  const [count, setCount] = useState(initialCount);
-  return (
+
+function Counter() {
+  const [count, setCount] = useState<number>(0);
+
+return (
     <>
       Count: {count}
-      <button onClick={() => setCount(initialCount)}>Reset</button>
       <button onClick={() => setCount((prevCount) => prevCount - 1)}>-</button>
       <button onClick={() => setCount((prevCount) => prevCount + 1)}>+</button>
     </>
@@ -30,18 +31,22 @@ References:
 - [Why you should use the URL to store state in your application](https://juhanajauhiainen.com/posts/why-you-should-use-url-to-store-state-in-your-application)
 
 
-```jsx title="useEffect"
+```tsx title="useEffect"
 import { useEffect, useState } from "react";
+
 function CountSecrets() {
   const [secret, setSecret] = useState({ value: "", countSecrets: 0 });
+
   useEffect(() => {
     if (secret.value === "secret") {
       setSecret((s) => ({ ...s, countSecrets: s.countSecrets + 1 }));
     }
   }, [secret.value]);
+
   const onChange = ({ target }) => {
     setSecret((s) => ({ ...s, value: target.value }));
   };
+
   return (
     <div>
       <input type="text" value={secret.value} onChange={onChange} />
@@ -59,18 +64,22 @@ References:
 
 
 
-```js title="useContext"
-import { useContext, createContext } from "react";
-const UserContext = createContext("Unknown");
+```tsx title="useContext"
+import * as React from "react";
+
+const UserContext = React.createContext("Unknown");
+
 function Application() {
   const userName = "John Smith";
+
   return (
     <UserContext.Provider value={userName}>
       <Layout>Main content</Layout>
     </UserContext.Provider>
   );
 }
-function Layout({ children }) {
+
+function Layout({ children }: {children: React.ReactNode}) {
   return (
     <div>
       <Header />
@@ -78,6 +87,7 @@ function Layout({ children }) {
     </div>
   );
 }
+
 function Header() {
   return (
     <header>
@@ -85,27 +95,26 @@ function Header() {
     </header>
   );
 }
+
 function UserInfo() {
-  const userName = useContext(UserContext);
+  const userName = React.useContext(UserContext);
+  
   return <span>{userName}</span>;
 }
 ```
 
 Refrences:
 
-- [A Guide to React Context and useContext() Hook](https://dmitripavlutin.com/react-context-and-usecontext/)
 - [useContext()](https://reactjs.org/docs/hooks-reference.html#usecontext)
 
 
-
-```js title='useMemo'
+```tsx title='useMemo'
 import { useState, useMemo } from "react";
 
 export function CalculateFactorial() {
   const [number, setNumber] = useState(1);
   const [inc, setInc] = useState(0);
 
-  //   const factorial = factorialOf(number)
   const factorial = useMemo(() => factorialOf(number), [number]);
 
   const onChange = (event) => {
@@ -128,20 +137,20 @@ function factorialOf(n) {
 }
 ```
 
-Refrences: [How to Memoize with React.useMemo()](https://dmitripavlutin.com/react-usememo-hook/)
 
-```jsx title="useCallback"
+```tsx title="memo"
 import useSearch from "./fetch-items";
 
-function MyBigList({ term, onItemClick }) {
+function LargeList({ term, onItemClick }) {
   const items = useSearch(term);
   const map = (item) => <div onClick={onItemClick}>{item}</div>;
+
   return <div>{items.map(map)}</div>;
 }
-export default React.memo(MyBigList);
+export const MemoizedLargeList = React.memo(LargeList);
 ```
 
-```jsx
+```tsx title="useCallback"
 import { useCallback } from "react";
 
 export function MyParent({ term }) {
@@ -157,11 +166,10 @@ export function MyParent({ term }) {
 
 Refrences:
 
-- [Your Guide to React.useCallback()](https://dmitripavlutin.com/dont-overuse-react-usecallback/)
 - [useCallback()](https://reactjs.org/docs/hooks-reference.html#usecallback)
 
 
-```js title="useReducer"
+```tsx title="useReducer"
 const initialState = { count: 0 };
 
 function reducer(state, action) {
@@ -193,7 +201,7 @@ Refrences:
 - [useReducer()](https://reactjs.org/docs/hooks-reference.html#usereducer)
 
 
-```js title="useRef"
+```tsx title="useRef"
 import { useRef, useState, useEffect } from "react";
 
 function Stopwatch() {
