@@ -11,7 +11,7 @@ If any one wants to fork this repo and use it as a template, please do! I would 
 
 ## Adding shadcn components from the ui package
 
-To add components to your app, run the following command at the root of your `portfolio` app:
+To add components to your app, run the following command at the root of the `monorepo` app:
 
 ```bash
 pnpm dlx shadcn@latest add button -c apps/portfolio
