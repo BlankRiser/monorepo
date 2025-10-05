@@ -1,3 +1,5 @@
+import type { ResumeData } from "../features/resume/data";
+
 /**
  * Extracts the 5 most prominent colors from an image without libraries.
  * @param image URL string or HTMLImageElement
@@ -66,4 +68,116 @@ export function rgbToHex(rgb: [number, number, number]): string {
       })
       .join("")
   );
+}
+
+export function getDateDifference(input: string): string {
+  const parsedDate = parseDate(input)
+  const currentDate = new Date();
+
+  if (isNaN(parsedDate.getTime())) {
+    throw new Error("Invalid date format. Use 'MMM yyyy' like 'Oct 2024'.");
+  }
+
+  let yearDiff = currentDate.getFullYear() - parsedDate.getFullYear();
+  let monthDiff = currentDate.getMonth() - parsedDate.getMonth();
+
+  let totalMonths = yearDiff * 12 + monthDiff;
+
+  // If input date is in the future, invert the sign
+  const isFuture = totalMonths < 0;
+  totalMonths = Math.abs(totalMonths);
+
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  let result = "";
+  if (years > 0) {
+    result += `${years} year${years > 1 ? "s" : ""}`;
+  }
+  if (months > 0) {
+    if (result) result += " ";
+    result += `${months} month${months > 1 ? "s" : ""}`;
+  }
+
+  // If zero months and years, say "0 months"
+  if (!result) result = "0 months";
+
+  return isFuture ? `in ${result}` : result;
+}
+
+export function formatExperienceDuration(totalMonths: number): string {
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  if (years && months) return `${years} year${years > 1 ? 's' : ''} ${months} month${months > 1 ? 's' : ''}`;
+  if (years) return `${years} year${years > 1 ? 's' : ''}`;
+  if (months) return `${months} month${months > 1 ? 's' : ''}`;
+  return '0 months';
+}
+
+/**
+ * Parses a date string in "MMM yyyy" format or "Present" to a Date object.
+ */
+export function parseDate(dateStr: string): Date {
+  if (dateStr.toLowerCase() === 'present') {
+    return new Date();
+  }
+  return new Date(`${dateStr} 01`);
+}
+
+export function parseMonthYear(dateStr: string): Date {
+  const months: { [key: string]: number } = {
+    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+  };
+
+  const parts = dateStr.trim().toLowerCase().split(' ');
+  const month = months[parts[0]];
+  const year = parseInt(parts[1]);
+
+  return new Date(year, month, 1);
+}
+
+export function formatExperience(totalMonths: number): string {
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+
+  if (years === 0) {
+    return months === 1 ? "1 month" : `${months} months`;
+  }
+
+  if (months === 0) {
+    return years === 1 ? "1 year" : `${years} years`;
+  }
+
+  const yearStr = years === 1 ? "1 year" : `${years} years`;
+  const monthStr = months === 1 ? "1 month" : `${months} months`;
+
+  return `${yearStr} ${monthStr}`;
+}
+
+export function calculateTotalExperience(experiences: (typeof ResumeData)["experience"]): string {
+  let totalMonths = 0;
+  const now = new Date();
+
+  for (const exp of experiences) {
+    const startDate = parseMonthYear(exp.company.startDate);
+    let endDate: Date;
+
+    if (exp.company.endDate.toLowerCase() === "present") {
+      endDate = now;
+    } else {
+      endDate = parseMonthYear(exp.company.endDate);
+    }
+
+    // Calculate months difference
+    const monthsDiff =
+      (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (endDate.getMonth() - startDate.getMonth());
+
+    // Add at least 1 month if the difference is 0 or negative (handle edge cases)
+    totalMonths += Math.max(monthsDiff, 0);
+  }
+
+  return formatExperience(totalMonths);
 }

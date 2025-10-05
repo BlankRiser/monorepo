@@ -24,7 +24,7 @@ export const ResumeProjects = ({
               key={index}
               className="grid grid-cols-[var(--cols-1-auto)] [&_>_dd]:even:place-self-end "
             >
-              <h3 className="text-[size:var(--font-size-fluid-0)] font-medium flex items-center gap-1">
+              <h3 className="text-[size:var(--font-size-fluid-0)] font-semibold flex items-center gap-1">
                 <a
                   href={project.links.website}
                   target="_blank"
@@ -36,7 +36,7 @@ export const ResumeProjects = ({
               <p className="text">
                 {project.startDate} - {project.endDate}
               </p>
-              <p>{project.description}</p>
+              <p className="text-zinc-600">{project.description}</p>
               <div className="flex gap-2 justify-end">
                 {project.links.jsr && (
                   <a href={project.links.jsr} target="_blank" rel="noreferrer">

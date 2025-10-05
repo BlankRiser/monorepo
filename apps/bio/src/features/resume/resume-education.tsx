@@ -18,7 +18,7 @@ export const ResumeEducation = ({
               key={index}
               className="grid grid-cols-[var(--cols-1-auto)] [&_>_dd]:even:place-self-end "
             >
-              <dt className="text-[size:var(--font-size-fluid-0)] font-medium">
+              <dt className="text-[size:var(--font-size-fluid-0)] font-semibold">
                 {edu.institution}
               </dt>
               <dd className="text">
