@@ -37,7 +37,7 @@ export const ResumeProjects = ({
                 {project.startDate} - {project.endDate}
               </p>
               <p className="text-zinc-600">{project.description}</p>
-              <div className="flex gap-2 justify-end">
+              <div className="flex gap-2 justify-end print:hidden">
                 {project.links.jsr && (
                   <a href={project.links.jsr} target="_blank" rel="noreferrer">
                     <Jsr className="size-5 h-[1lh]" />

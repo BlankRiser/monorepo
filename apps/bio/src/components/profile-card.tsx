@@ -65,8 +65,8 @@ const about = {
 
 export const ProfileCard = () => {
   return (
-    <div className=" w-full md:max-w-lg h-full md:h-[90dvh] ">
-      <div className="md:rounded-3xl flex flex-col overflow-hidden ">
+    <div className="w-full md:max-w-lg h-full flex items-center justify-center ">
+      <div className="w-full md:rounded-3xl flex flex-col overflow-hidden ">
         <div className="relative [background-image:url(/assets/ram.webp)] bg-cover bg-no-repeat bg-center md:bg-top bg-blue-900 aspect-square">
           <div className="absolute bottom-0 flex flex-col justify-end h-full w-full p-4 text-blue-50 bg-[linear-gradient(0deg,var(--color-blue-900)_0%,rgba(45,222,253,0.04)_60%)]">
             <h1
