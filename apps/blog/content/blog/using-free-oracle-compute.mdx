@@ -26,46 +26,46 @@ ssh -i <private-key.key> <username>@<public-ip>
 If you are using oracle linux, you have to enable EPEL repository to install packages like `htop`, `wget`, `curl`, etc. 
 
 ```sh
-~ dnf search epel
+dnf search epel
 
-Last metadata expiration check: 0:02:43 ago on Sat 28 Sep 2024 01:04:40 PM GMT.
-=============================== Name & Summary Matched: epel ================================
-oracle-epel-release-el9.aarch64 : Extra Packages for Enterprise Linux (EPEL) yum repository
-                                : configuration
-oracle-epel-release-el9.src : Extra Packages for Enterprise Linux (EPEL) yum repository
-                            : configuration
+# Last metadata expiration check: 0:02:43 ago on Sat 28 Sep 2024 01:04:40 PM GMT.
+# =============================== Name & Summary Matched: epel ================================
+# oracle-epel-release-el9.aarch64 : Extra Packages for Enterprise Linux (EPEL) yum repository
+#                                 : configuration
+# oracle-epel-release-el9.src : Extra Packages for Enterprise Linux (EPEL) yum repository
+#                             : configuration
 ```
 
 From the above command, we get a list of repo's that are available.
 
 ```sh
-~ rpm -q oracle-epel-release-el9.aarch64
+rpm -q oracle-epel-release-el9.aarch64
 
-oracle-epel-release-el9-1.0-1.el9.aarch64
+# oracle-epel-release-el9-1.0-1.el9.aarch64
 ```
 
 ```sh
-~ dnf repolist --all | grep -i epel
+dnf repolist --all | grep -i epel
 
-ol9_developer_EPEL            Oracle Linux 9 EPEL Packages for Developm disabled
+# ol9_developer_EPEL            Oracle Linux 9 EPEL Packages for Developm disabled
 ```
 
 Let's enable the EPEL repo
 
 ```sh
-~ sudo dnf config-manager --enable ol9_developer_EPEL
+sudo dnf config-manager --enable ol9_developer_EPEL
 ```
 
 
 Let's verify if it has been enabled:
 
 ```sh
-~ dnf repolist --all | grep -i epel
+dnf repolist --all | grep -i epel
 ```
 
 Install your package
 
 ```sh
-~ sudo dnf install htop
+sudo dnf install htop
 ```
 

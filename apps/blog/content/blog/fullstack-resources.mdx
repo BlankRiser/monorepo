@@ -1,0 +1,201 @@
+---
+author: Ram
+date: 2025-11-30
+title: My Full-Stack Tech Stack in 2025
+description: A typescript-first developer's breakdown Of his tech stack
+image: "/images/blog/workstation.jpeg"
+draft: false
+toc: false
+---
+
+If you've met me—or even skimmed through my GitHub—you already know one thing: my world revolves around TypeScript. It's the language I reach for whether I'm spinning up a quick prototype, architecting a large SaaS product, or hacking together a random side project at 2 a.m.
+
+Over the years I've refined a tech stack that helps me move fast, stay safe, and ship real products without drowning in complexity. Here's a breakdown of what I use, why I use it, and when each tool shines.
+
+---
+
+## 🎨 Frontend: TypeScript All the Way Down
+
+### **React (Core UI Workhorse)**
+
+React remains my foundational UI library. Not because it's trendy, but because:
+
+* the ecosystem is massive,
+* the patterns are flexible,
+* and honestly, hooks just feel like muscle memory now.
+
+### **Next.js (Production-Ready React)**
+
+When I need a strong convention-driven environment—routing, server actions, image optimization, caching layers—**Next.js** is my default.
+Perfect for:
+
+* SaaS dashboards
+* Marketing sites
+* SEO-heavy pages
+* Hybrid SSR/ISR experiences
+
+### **TanStack Start (The New Kid I'm Loving)**
+
+A fresh, modern take on app routing grounded in TanStack Router.
+Why I like it:
+
+* File-based routing without the Next.js magic
+* Progressive enhancement baked in
+* Great for SPAs with sprinkles of server logic
+
+### **Astro (Island-Based Performance Beast)**
+
+When perf matters more than interactivity, I reach for **Astro**.
+It's my go-to for:
+
+* Documentation websites
+* Content-heavy blogs
+* Landing pages with tiny hydration footprints
+
+---
+
+## ⚙️ Backend: TypeScript From Edge to Cloud
+
+I treat backend the same way I treat frontend: typed, fast, and flexible.
+
+### **Elysia (The Bun-Optimized Powerhouse)**
+
+I reach for **Elysia** when using Bun or when I want extreme performance with a smart plugin ecosystem and great DX.
+
+### **Hono (My Go-To Edge Framework)**
+
+Tiny, lightning-fast, Cloudflare-friendly.
+If I'm deploying to the edge, I'm using **Hono**.
+
+
+---
+
+## 🖥️ Runtimes: Node, Deno, Bun
+
+### **Node.js**
+
+Still my default runtime for production unless I explicitly need edge or Bun optimizations.
+
+### **Deno**
+
+Secure by default, incredibly modern, great for small serverless functions or scripts.
+
+### **Bun**
+
+Fast as hell. Fantastic for:
+
+* local dev
+* tooling
+* high-performance microservices with Elysia
+
+---
+
+## 🗂️ Databases & Storage Layer
+
+I've used a lot of databases across projects and these are the ones I keep coming back to:
+
+### **Convex (My Favorite Realtime DB/Backend-as-a-Service)**
+
+It handles data, queries, functions, auth glue—all in typed TypeScript.
+For dashboards and apps needing reactive data: unmatched.
+
+### **Supabase (Firebase Alternative, But SQL)**
+
+Perfect for:
+
+* auth + storage
+* easy SQL
+* real-time features
+* edge functions
+
+### **Neon (Serverless Postgres Done Right)**
+
+Great for multi-branch development. I love its:
+
+* auto-suspend
+* branching model
+* Postgres ecosystem compatibility
+
+### **PlanetScale (MySQL + Branch-Everywhere Joy)**
+
+If I need MySQL with world-class DX, branching workflows, and horizontal scale, PlanetScale is the answer.
+
+### **Turso (SQLite at the Edge)**
+
+For:
+
+* blazing-fast reads
+* distributed edge workloads
+* simple, low-latency apps
+
+---
+
+## 🛠️ SaaS Tools I Use Daily
+
+### **Clerk (Authentication Done Properly)**
+
+The best developer experience for auth.
+Typed, flexible, and integrates beautifully with workflows.
+
+### **WorkOS (Enterprise-Grade Auth & Compliance)**
+
+Whenever SSO or anything “enterprise” enters the chat, WorkOS is my easy button.
+
+### **PostHog (Analytics & Feature Flags)**
+
+Self-hostable, privacy-friendly, and perfect for:
+
+* product analytics
+* feature rollouts
+* session replays
+
+### **Sentry (Error Monitoring & Performance)**
+
+Great crash reporting on both frontend and backend.
+
+### **AWS (Big Iron Cloud Stuff)**
+
+When I need:
+
+* S3
+* Lambda
+* CloudFront
+* or something with long-term reliability
+
+I still lean on AWS.
+
+---
+
+## ✍️ Typography Choices (Because Developers Have Taste Too)
+
+Fonts matter. They can change the entire vibe of a product. Here's my personal rulebook:
+
+### **🧾 Receipts, Terminal Displays**
+
+**Departure Mono**
+A pixel-perfect monospaced font I use whenever something needs that retro-printer aesthetic.
+
+### **💻 Code & Technical UI**
+
+**JetBrains Mono**
+Clean, readable, great ligatures—my default coding font.
+
+### **📰 Headers & Hero Sections**
+
+**Instrument Sans** or **DM Sans**
+Both have premium vibes and look amazing for feature titles or clean headers.
+
+### **📄 Body Text (Docs, Product UI)**
+
+**Geist** or **Inter**
+Readable, neutral, and modern.
+These make UIs feel professional without drawing unnecessary attention to themselves.
+
+---
+
+## 🚀 Final Thoughts
+
+My stack is always evolving, but one thing stays constant: **I optimize for developer experience, velocity, and type-safe correctness**.
+TypeScript ties my entire workflow together—from React components to backend functions to database queries.
+
+If you're building in 2026 and want a stack that feels cohesive, modern, and insanely productive, I can't recommend this ecosystem enough.
