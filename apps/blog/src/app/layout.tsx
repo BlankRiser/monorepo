@@ -1,6 +1,6 @@
-import { RootProvider } from "fumadocs-ui/provider";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./global.css";
+import { RootProvider } from "fumadocs-ui/provider";
 
 const fontSans = Geist({
   subsets: ["latin"],

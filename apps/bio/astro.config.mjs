@@ -1,7 +1,8 @@
 // @ts-check
 
-import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import pdf from "astro-pdf";
 
 import react from "@astrojs/react";
 
@@ -9,7 +10,30 @@ import react from "@astrojs/react";
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
-  
   },
-  integrations: [react()],
+  integrations: [
+    react(),
+    pdf({
+      pages: {
+        "/resume": [
+          {
+            path: "/ram_resume.pdf",
+            ensurePath: true,
+            throwOnFail: true,
+            pdf: {
+              margin: {
+                top: '16px',
+                bottom: '16px',
+              },
+              timeout: 10_000,
+            },
+            callback: async (page) => {
+              const title = "Ram Shankar Choudhary";
+              await page.evaluate((title) => (document.title = title), title);
+            },
+          },
+        ],
+      },
+    }),
+  ],
 });

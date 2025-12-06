@@ -18,6 +18,11 @@ export const ResumeData = {
       },
     },
   },
+  manifesto: [
+    "I am a Full Stack Developer with a passion for building digital products that solve real-world problems. My journey in tech is driven by a curiosity to understand how things work and a desire to create meaningful experiences.",
+    "I specialize in the JavaScript ecosystem, leveraging tools like React, Next.js, Node.js, and TypeScript to build robust and scalable applications. I believe in clean code, user-centric design, and continuous learning.",
+    "Why do I do this? Because I love the process of turning ideas into reality. Whether it's a simple website or a complex web application, there's a unique satisfaction in crafting something that others can use and enjoy.",
+  ],
   education: [
     {
       institution: "Bits Pilani (WILP)",

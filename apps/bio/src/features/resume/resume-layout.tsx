@@ -9,7 +9,7 @@ export const ResumeLayout = ({
   return (
     <main
       className={cn([
-        "py-[10vh] px-4 text-zinc-800 dark:text-zinc-200",
+        "py-[10vh] print:py-0 px-4 text-zinc-800 dark:text-zinc-200",
         className,
       ])}
       {...rest}

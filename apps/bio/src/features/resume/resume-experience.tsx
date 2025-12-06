@@ -10,9 +10,9 @@ export const ResumeExperience = ({
 
   return (
     <section className="grid gap-6">
-      <h2 className="text-[size:var(--font-size-fluid-1)] font-p22 font-semibold border-b-1 border-blue-500 w-full flex justify-between items-center">
+      <h2 className="text-(size:--font-size-fluid-1) font-p22 font-semibold border-b border-blue-500 w-full flex justify-between items-center">
         Experience
-        <span className="font-medium text-sm h-[1lh] align-middle bg-zinc-100 text-zinc-800 rounded-md px-2 ml-2">
+        <span className="font-medium text-sm h-lh align-middle bg-zinc-100 text-zinc-800 rounded-md px-2 ml-2">
           {totalExperience}
         </span>
       </h2>
@@ -25,14 +25,20 @@ export const ResumeExperience = ({
 
           return (
             <article key={index}>
-              <header className="grid grid-cols-[var(--cols-1-auto)] [&_>_dd]:even:place-self-end">
-                <h3 className="text-[size:var(--font-size-fluid-0)] font-semibold flex items-center gap-1">
+              <header className="grid grid-cols-(--cols-1-auto) [&_>_dd]:even:place-self-end">
+                <h3 className="text-(size:--font-size-fluid-0) font-semibold flex items-center gap-1">
                   <a href={exp.company.url} target="_blank" rel="noreferrer">
                     {exp.company.name}
                   </a>
                 </h3>
                 <p className="text-right">
-                  {exp.company.startDate} - {exp.company.endDate}
+                  <time dateTime={exp.company.startDate}>
+                    {exp.company.startDate}
+                  </time>
+                  {" - "}
+                  <time dateTime={exp.company.endDate}>
+                    {exp.company.endDate}
+                  </time>
                 </p>
                 <p className="font-medium text-zinc-800">
                   {exp.role}{" "}

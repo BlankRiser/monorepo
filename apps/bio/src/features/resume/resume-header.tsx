@@ -9,11 +9,11 @@ export const ResumeHeader = ({
 }) => {
   return (
     <header className="grid">
-      <h1 className="text-[size:var(--font-size-fluid-2)] font-bold font-p22">
+      <h1 className="text-(size:--font-size-fluid-2) font-bold font-p22">
         {header.name}
       </h1>
       <SocialLinks social={header.social} />
-      <section className="mt-8">
+      <section className="mt-8 print:hidden">
         <ResumeSummary summary={header.summary} />
       </section>
     </header>

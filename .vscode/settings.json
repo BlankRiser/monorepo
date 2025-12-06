@@ -1,5 +1,6 @@
 {
   "tailwindCSS.experimental.configFile": "packages/ui/src/styles/globals.css",
+  "tailwindCSS.classFunctions": ["cva", "cn"],
   "search.exclude": {
     "**/node_modules": true,
     "**/*.next": true,
