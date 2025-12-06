@@ -13,7 +13,7 @@ export default defineConfig({
   },
   integrations: [
     react(),
-    pdf({
+    process.env.NODE_ENV === 'development' && pdf({
       pages: {
         "/resume": [
           {
