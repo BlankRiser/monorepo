@@ -1,6 +1,7 @@
 export const ResumeData = {
   header: {
     name: "Ram Shankar Choudhary",
+    ipa: "/ræm ʃænkær tʃɒʌdhæry/",
     summary:
       "4+ years of experience in Software development, architecture and design.",
     social: {

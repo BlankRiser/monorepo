@@ -31,7 +31,7 @@ const projects = [
     github: "https://github.com/BlankRiser/ui.ram.codes",
   },
   {
-    label: "Devhaven (VS Code Theme)",
+    label: "Devhaven Theme",
     url: "https://marketplace.visualstudio.com/items?itemName=DevHaven.devhaven",
     github: "https://github.com/BlankRiser/DevHaven",
   },
@@ -88,8 +88,8 @@ export function Footer(props: FooterProps) {
           <Link href="/about" className={footerLinkClass}>
             About
           </Link>
-          <Link href="/moodboard" className={footerLinkClass}>
-            Moodboard
+          <Link href="/projects" className={footerLinkClass}>
+            Projects
           </Link>
           <Link href="/writing" className={footerLinkClass}>
             Writing
@@ -133,6 +133,7 @@ export function Footer(props: FooterProps) {
           {socials.map((s, i) => {
             return (
               <a
+                key={i}
                 href={s.link}
                 target="_blank"
                 rel="noreferrer"
