@@ -1,6 +1,6 @@
 import { cn } from "@workspace/ui/lib/utils";
 
-type Work = {
+export type Work = {
   year: number;
   role: string;
   slug: string;
