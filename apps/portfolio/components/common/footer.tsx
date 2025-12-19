@@ -60,6 +60,13 @@ const socials = [
   },
 ];
 
+const otherLinks = [
+  {
+    label: "spendsmart.quest",
+    url: "https://www.spendsmart.quest/",
+  },
+];
+
 type FooterProps = React.ComponentProps<"footer">;
 
 const footerLinkClass = cn([
@@ -76,7 +83,6 @@ export function Footer(props: FooterProps) {
       className="mx-auto max-w-3xl px-6 py-20 text-sm text-neutral-500"
     >
       <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
-        {/* Column 1 */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -98,7 +104,6 @@ export function Footer(props: FooterProps) {
             Contact
           </Link>
         </motion.div>
-        {/* Column 2 (projects) */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,7 +126,6 @@ export function Footer(props: FooterProps) {
             );
           })}
         </motion.div>
-        {/* Column 3 */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +133,29 @@ export function Footer(props: FooterProps) {
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.14 }}
           className="flex flex-col gap-3"
         >
-          <h3 className="font-medium text-white">Elsewhere</h3>
+          <h3 className="font-medium text-white">Other</h3>
+          {otherLinks.map((l, i) => {
+            return (
+              <a
+                key={i}
+                href={l.url}
+                target="_blank"
+                rel="noreferrer"
+                className={footerLinkClass}
+              >
+                {l.label}
+              </a>
+            );
+          })}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.14 }}
+          className="flex flex-col gap-3"
+        >
+          <h3 className="font-medium text-white">Socials</h3>
           {socials.map((s, i) => {
             return (
               <a
@@ -144,8 +170,6 @@ export function Footer(props: FooterProps) {
             );
           })}
         </motion.div>
-        {/* empty placeholder to keep 4-column layout consistency on sm+ */}
-        <div className="hidden sm:block" />
       </div>
 
       <motion.div

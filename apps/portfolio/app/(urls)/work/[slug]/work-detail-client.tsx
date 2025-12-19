@@ -166,7 +166,7 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
                 title={tech}
               >
                 {icon && (
-                  <span className="[&>svg]:size-5 [&>svg]:text-neutral-800">
+                  <span className="[&>svg]:size-5 [&>svg]:text-neutral-800 [&>svg]:dark:text-neutral-200">
                     {icon}
                   </span>
                 )}

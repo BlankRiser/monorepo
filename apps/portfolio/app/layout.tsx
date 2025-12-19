@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import "@workspace/ui/globals.css";
+import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 
 const defaults = {
   name: "ram.codes",
@@ -190,13 +191,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased bg-neutral-50 dark:bg-neutral-950 `}
       >
-        <header>
-          <nav />
-        </header>
-        <Providers>{children}</Providers>
-        <Footer />
+        <Providers>
+          <>
+            {children}
+            <PortfolioCommandBar />
+            <Footer />
+          </>
+        </Providers>
       </body>
     </html>
   );
