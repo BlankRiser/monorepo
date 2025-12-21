@@ -6,6 +6,10 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+::selection{
+  background-color: #94ffaf;
+  color: black;
+}
 
 :root {
   --background: oklch(1 0 0);

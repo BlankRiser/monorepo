@@ -1,7 +1,7 @@
 "use client";
 
-import { type Work } from "@/data/work";
 import { ICONMAP } from "@/components/common/tech-icon-map";
+import { type Work } from "@/data/work";
 import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -48,7 +48,7 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-        className="relative aspect-video mx-auto overflow-hidden rounded-xl mb-8 bg-neutral-800"
+        className="relative aspect-video mx-auto overflow-hidden rounded-xl mb-8"
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative w-1/2 h-1/2">
@@ -59,6 +59,18 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
               fill
               className="object-cover"
             />
+            {/* <ImageDithering
+              image={work.image}
+              colorBack="#0a0a0a"
+              colorFront="#94ffaf"
+              colorHighlight="#eaff94"
+              originalColors={false}
+              type="8x8"
+              size={2}
+              colorSteps={2}
+              fit="cover"
+              className="absolute inset-0"
+            /> */}
           </div>
         </div>
       </motion.div>

@@ -148,6 +148,9 @@ importers:
 
   apps/portfolio:
     dependencies:
+      '@paper-design/shaders-react':
+        specifier: ^0.0.67
+        version: 0.0.67(@types/react@19.2.7)(react@19.2.0)
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../packages/ui

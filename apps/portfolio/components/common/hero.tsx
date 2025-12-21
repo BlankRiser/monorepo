@@ -1,5 +1,6 @@
 "use client";
 
+import { Heatmap, LiquidMetal } from "@paper-design/shaders-react";
 import { GithubIcon } from "@workspace/ui/icons/github-icon";
 import { LinkedinIcon } from "@workspace/ui/icons/linkedin-icon";
 import { MailIcon } from "@workspace/ui/icons/mail-icon";
@@ -14,20 +15,40 @@ export const Hero = (props: HeroProps) => {
       {...props}
       className={cn(["flex flex-col gap-4", props.className])}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <motion.h1 className="text-4xl font-semibold tracking-tight text-black dark:text-white sm:text-5xl">
-          Ram Shankar Choudhary
-        </motion.h1>
-        <motion.span className="text-base text-neutral-400 dark:text-neutral-600">
-          {
-            "/\u0072\u00E6\u006D \u0283\u00E6\u006E\u006B\u00E6\u0072 \u0074\u0283\u0252\u028C\u0064\u0068\u00E6\u0072\u0079/"
-          }
-        </motion.span>
-      </motion.div>
+      <div className="flex flex-col gap-2">
+        <LiquidMetal
+          width={100}
+          height={100}
+          image="/devhaven-logo.svg"
+          colorBack="#0a0a0a"
+          colorTint="#ffffff"
+          shape="daisy"
+          repetition={2}
+          softness={0.1}
+          shiftRed={0.1}
+          shiftBlue={0.1}
+          distortion={0.07}
+          contour={0.4}
+          angle={70}
+          speed={0.75}
+          scale={0.6}
+          fit="contain"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <motion.h1 className="text-4xl font-semibold tracking-tight text-black dark:text-white sm:text-5xl">
+            Ram Shankar Choudhary
+          </motion.h1>
+          <motion.span className="text-base text-neutral-400 dark:text-neutral-600">
+            {
+              "/\u0072\u00E6\u006D \u0283\u00E6\u006E\u006B\u00E6\u0072 \u0074\u0283\u0252\u028C\u0064\u0068\u00E6\u0072\u0079/"
+            }
+          </motion.span>
+        </motion.div>
+      </div>
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}

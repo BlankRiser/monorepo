@@ -1,10 +1,9 @@
 import { Footer } from "@/components/common/footer";
+import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 import { Providers } from "@/components/providers";
+import "@workspace/ui/globals.css";
 import { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-
-import "@workspace/ui/globals.css";
-import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 
 const defaults = {
   name: "ram.codes",
