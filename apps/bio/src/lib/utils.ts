@@ -5,7 +5,9 @@ import type { ResumeData } from "../features/resume/data";
  * @param image URL string or HTMLImageElement
  * @returns Promise resolving to array of RGB tuples [r, g, b]
  */
-export async function getProminentColors(image: HTMLImageElement | string): Promise<[number, number, number][]> {
+export async function getProminentColors(
+  image: HTMLImageElement | string
+): Promise<[number, number, number][]> {
   return new Promise((resolve, reject) => {
     const img = typeof image === "string" ? new Image() : image;
 
@@ -36,7 +38,9 @@ export async function getProminentColors(image: HTMLImageElement | string): Prom
         colorCount[key] = (colorCount[key] || 0) + 1;
       }
 
-      const sortedColors: [number, number, number][] = Object.entries(colorCount)
+      const sortedColors: [number, number, number][] = Object.entries(
+        colorCount
+      )
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5)
         .map(([key]) => {
@@ -71,7 +75,7 @@ export function rgbToHex(rgb: [number, number, number]): string {
 }
 
 export function getDateDifference(input: string): string {
-  const parsedDate = parseDate(input)
+  const parsedDate = parseDate(input);
   const currentDate = new Date();
 
   if (isNaN(parsedDate.getTime())) {
@@ -109,29 +113,70 @@ export function formatExperienceDuration(totalMonths: number): string {
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
 
-  if (years && months) return `${years} year${years > 1 ? 's' : ''} ${months} month${months > 1 ? 's' : ''}`;
-  if (years) return `${years} year${years > 1 ? 's' : ''}`;
-  if (months) return `${months} month${months > 1 ? 's' : ''}`;
-  return '0 months';
+  if (years && months)
+    return `${years} year${years > 1 ? "s" : ""} ${months} month${months > 1 ? "s" : ""}`;
+  if (years) return `${years} year${years > 1 ? "s" : ""}`;
+  if (months) return `${months} month${months > 1 ? "s" : ""}`;
+  return "0 months";
 }
 
 /**
  * Parses a date string in "MMM yyyy" format or "Present" to a Date object.
+ * Handled manually to avoid Safari "Invalid Date" issues with "MMM yyyy".
  */
 export function parseDate(dateStr: string): Date {
-  if (dateStr.toLowerCase() === 'present') {
+  if (dateStr.toLowerCase() === "present") {
     return new Date();
   }
-  return new Date(`${dateStr} 01`);
+
+  const parts = dateStr.split(" ");
+  if (parts.length !== 2) {
+    return new Date(dateStr); // Fallback to standard parsing if not "MMM yyyy"
+  }
+
+  const [monthStr, yearStr] = parts;
+  const monthMap: Record<string, number> = {
+    Jan: 0,
+    Feb: 1,
+    Mar: 2,
+    Apr: 3,
+    May: 4,
+    Jun: 5,
+    Jul: 6,
+    Aug: 7,
+    Sep: 8,
+    Oct: 9,
+    Nov: 10,
+    Dec: 11,
+  };
+
+  const month = monthMap[monthStr];
+  const year = parseInt(yearStr, 10);
+
+  if (month !== undefined && !isNaN(year)) {
+    return new Date(year, month);
+  }
+
+  return new Date(dateStr);
 }
 
 export function parseMonthYear(dateStr: string): Date {
   const months: { [key: string]: number } = {
-    jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
-    jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+    jan: 0,
+    feb: 1,
+    mar: 2,
+    apr: 3,
+    may: 4,
+    jun: 5,
+    jul: 6,
+    aug: 7,
+    sep: 8,
+    oct: 9,
+    nov: 10,
+    dec: 11,
   };
 
-  const parts = dateStr.trim().toLowerCase().split(' ');
+  const parts = dateStr.trim().toLowerCase().split(" ");
   const month = months[parts[0]];
   const year = parseInt(parts[1]);
 
@@ -156,7 +201,9 @@ export function formatExperience(totalMonths: number): string {
   return `${yearStr} ${monthStr}`;
 }
 
-export function calculateTotalExperience(experiences: (typeof ResumeData)["experience"]): string {
+export function calculateTotalExperience(
+  experiences: (typeof ResumeData)["experience"]
+): string {
   let totalMonths = 0;
   const now = new Date();
 

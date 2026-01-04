@@ -1,6 +1,6 @@
 "use client";
 
-import { Heatmap, LiquidMetal } from "@paper-design/shaders-react";
+import { LiquidMetal } from "@paper-design/shaders-react";
 import { GithubIcon } from "@workspace/ui/icons/github-icon";
 import { LinkedinIcon } from "@workspace/ui/icons/linkedin-icon";
 import { MailIcon } from "@workspace/ui/icons/mail-icon";
