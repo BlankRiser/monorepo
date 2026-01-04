@@ -4,7 +4,7 @@ import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
 import Link from "next/link";
 
-const projects = [
+export const projects = [
   {
     label: "Mausam",
     url: "https://mausam.ram.codes/",
@@ -37,7 +37,7 @@ const projects = [
   },
 ];
 
-const socials = [
+export const socials = [
   {
     platform: "Linkedin",
     username: "ram-shankar-choudhary",
@@ -60,7 +60,7 @@ const socials = [
   },
 ];
 
-const otherLinks = [
+export const otherLinks = [
   {
     label: "spendsmart.quest",
     url: "https://www.spendsmart.quest/",

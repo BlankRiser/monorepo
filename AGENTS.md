@@ -32,14 +32,10 @@ nvm use 24 && pnpm build
 
 ## Project Overview
 
-**Graz** is a React hooks library for building applications in the Cosmos ecosystem. It provides a comprehensive set of hooks and utilities for wallet connections, signing clients, token transfers, smart contract interactions, and multi-chain support.
+**mono** is a monorepo for my personal blog, portfolio and bio.
 
 ### Key Features
 
-- 20+ React hooks for Cosmos wallet interactions
-- Multi-wallet support (Keplr, Leap, Cosmostation, Vectis, Station, XDefi, Metamask Snap, WalletConnect, Compass, Initia, OKX, Para, Cosmiframe)
-- Multi-chain support (connect and interact with multiple chains simultaneously)
-- Built on `@tanstack/react-query` and `zustand` for state management
 - TypeScript-first with full type safety
 - Tree-shakeable and optimized for production
 
@@ -50,9 +46,7 @@ nvm use 24 && pnpm build
 - **Next.js** - react framework
 - **Astro.js** - web framework
 - **TailwindCss** - Utility first CSS framework
-- **@tanstack/react-query** - Data fetching and caching
-- **Zustand** - State management (stores wallet state, session, configuration)
-- **Turbo** - Monorepo build system
+- **Turborepo** - Monorepo build system
 - **pnpm** - Package manager
 
 ---
