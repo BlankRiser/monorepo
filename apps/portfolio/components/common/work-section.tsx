@@ -3,7 +3,7 @@
 import { works } from "@/data/work";
 import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 export const WorkSection = () => {
   return (
@@ -39,7 +39,14 @@ export const WorkSection = () => {
               ])}
             >
               <div className="flex flex-col gap-0.5 min-w-0">
-                <span className="font-medium text-neutral-900 dark:text-neutral-100 truncate">
+                <span
+                  className="font-medium text-neutral-900 dark:text-neutral-100 truncate"
+                  style={
+                    {
+                      viewTransitionName: `work-title-${work.slug}`,
+                    } as React.CSSProperties
+                  }
+                >
                   {work.company}
                 </span>
                 <span className="text-sm text-neutral-500 dark:text-neutral-400 truncate">

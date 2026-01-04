@@ -4,8 +4,8 @@ import { ICONMAP } from "@/components/common/tech-icon-map";
 import { type Work } from "@/data/work";
 import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
-import Link from "next/link";
 
 type WorkDetailClientProps = {
   work: Work;
@@ -15,40 +15,36 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
   return (
     <div className="mx-auto max-w-3xl px-6 pb-20 pt-8 md:pt-24">
       <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+        className="mb-8"
       >
-        <Link
-          href="/"
-          className={cn([
-            "inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900",
-            "dark:text-neutral-400 dark:hover:text-neutral-100",
-            "transition-colors duration-200 mb-8",
-          ])}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        <div className="flex items-center gap-3 mb-2">
+          <h1
+            className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100"
+            style={
+              {
+                viewTransitionName: `work-title-${work.slug}`,
+              } as React.CSSProperties
+            }
           >
-            <path d="m12 19-7-7 7-7" />
-            <path d="M19 12H5" />
-          </svg>
-          Back
-        </Link>
+            {work.company}
+          </h1>
+          <span className="text-sm text-neutral-400 dark:text-neutral-500">
+            {work.year}
+          </span>
+        </div>
+        <p className="text-neutral-600 dark:text-neutral-400">
+          {work.role} · {work.position}
+        </p>
       </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-        className="relative aspect-video mx-auto overflow-hidden rounded-xl mb-8"
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+        className="relative aspect-video mx-auto rounded-xs overflow-hidden mb-8 border border-dashed"
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative w-1/2 h-1/2">
@@ -73,25 +69,6 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
             /> */}
           </div>
         </div>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
-        className="mb-8"
-      >
-        <div className="flex items-center gap-3 mb-2">
-          <h1 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
-            {work.company}
-          </h1>
-          <span className="text-sm text-neutral-400 dark:text-neutral-500">
-            {work.year}
-          </span>
-        </div>
-        <p className="text-neutral-600 dark:text-neutral-400">
-          {work.role} · {work.position}
-        </p>
       </motion.div>
 
       {work.tags.length > 0 && (
