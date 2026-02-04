@@ -10,7 +10,7 @@ export const ResumeExperience = ({
 
   return (
     <section className="grid gap-6">
-      <h2 className="text-(size:--font-size-fluid-1) font-p22 font-semibold border-b border-blue-500 w-full flex justify-between items-center">
+      <h2 className="text-(size:--font-size-fluid-1) font-p22 font-semibold border-b border-primary w-full flex justify-between items-center">
         Experience
         <span className="font-medium text-sm h-lh align-middle bg-zinc-100 text-zinc-800 rounded-md px-2 ml-2">
           {totalExperience}

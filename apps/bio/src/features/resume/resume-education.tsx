@@ -8,7 +8,7 @@ export const ResumeEducation = ({
 }) => {
   return (
     <section className="grid gap-6">
-      <h2 className="text-[size:var(--font-size-fluid-1)] font-p22 font-semibold border-b-1 border-blue-500">
+      <h2 className="text-(size:--font-size-fluid-1) font-p22 font-semibold border-b border-primary">
         Education
       </h2>
       <dl className="grid gap-4 text-sm">
@@ -16,9 +16,9 @@ export const ResumeEducation = ({
           return (
             <div
               key={index}
-              className="grid grid-cols-[var(--cols-1-auto)] [&_>_dd]:even:place-self-end "
+              className="grid grid-cols-(--cols-1-auto) [&_>_dd]:even:place-self-end "
             >
-              <dt className="text-[size:var(--font-size-fluid-0)] font-semibold">
+              <dt className="text-(size:--font-size-fluid-0) font-semibold">
                 {edu.institution}
               </dt>
               <dd className="text">

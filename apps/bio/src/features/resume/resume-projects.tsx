@@ -14,7 +14,7 @@ export const ResumeProjects = ({
 }) => {
   return (
     <section className="grid gap-6">
-      <h2 className="text-[size:var(--font-size-fluid-1)] font-p22 font-semibold border-b-1 border-blue-500">
+      <h2 className="text-(size:--font-size-fluid-1) font-p22 font-semibold border-b border-primary">
         Projects
       </h2>
       <dl className="grid gap-4 text-sm">
@@ -22,9 +22,9 @@ export const ResumeProjects = ({
           return (
             <div
               key={index}
-              className="grid grid-cols-[var(--cols-1-auto)] [&_>_dd]:even:place-self-end "
+              className="grid grid-cols-(--cols-1-auto) [&_>_dd]:even:place-self-end "
             >
-              <h3 className="text-[size:var(--font-size-fluid-0)] font-semibold flex items-center gap-1">
+              <h3 className="text-(size:--font-size-fluid-0) font-semibold flex items-center gap-1">
                 <a
                   href={project.links.website}
                   target="_blank"
@@ -40,12 +40,12 @@ export const ResumeProjects = ({
               <div className="flex gap-2 justify-end print:hidden">
                 {project.links.jsr && (
                   <a href={project.links.jsr} target="_blank" rel="noreferrer">
-                    <Jsr className="size-5 h-[1lh]" />
+                    <Jsr className="size-5 h-lh" />
                   </a>
                 )}
                 {project.links.npm && (
                   <a href={project.links.npm} target="_blank" rel="noreferrer">
-                    <Npm className="h-[1lh]" />
+                    <Npm className="h-lh" />
                   </a>
                 )}
                 {project.links.github && (
@@ -54,7 +54,7 @@ export const ResumeProjects = ({
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <Github className="h-[1lh]" />
+                    <Github className="h-lh" />
                   </a>
                 )}
                 {project.links.website && (
@@ -63,7 +63,7 @@ export const ResumeProjects = ({
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <GlobeDualTone className="h-[1lh]" />
+                    <GlobeDualTone className="h-lh" />
                   </a>
                 )}
               </div>

@@ -63,10 +63,26 @@ export const ResumeData = {
         experience: "Present",
       },
       responsibilities: [
-        "Spearhead the development of features and enhancements to improve user experience and functionality",
+        <p>
+          Lead the development of a{" "}
+          <a
+            href="https://viewer.synopticdata.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-primary underline"
+          >
+            data viewer
+          </a>{" "}
+          platform used to visualize and analyze large-scale datasets (100k+
+          records per view), improving data accessibility for internal and
+          external stakeholders
+        </p>,
+        "Designed and implemented modular frontend architecture, reducing feature development time by ~30%",
+        "Collaborated closely with product and data teams to deliver multiple production releases with zero critical regressions",
         "Write technical documentation to assist developers understand and work on the project",
-        "Support in troubleshooting and resolving issues reported by users",
-        "Conduct frequent code reviews to ensure code quality and adherence to best practices",
+        "Improved application performance by ~25% through optimized data fetching and rendering strategies",
+        // "Support in troubleshooting and resolving issues reported by users",
+        // "Conduct frequent code reviews to ensure code quality and adherence to best practices",
       ],
     },
     {
@@ -84,10 +100,11 @@ export const ResumeData = {
         // "Led the development of a comprehensive onboarding solution for enterprise applications, enhancing user engagement and retention",
         // "Collaborated with cross-functional teams to design and implement features that met client requirements",
         // "Ensured the application met enterprise standards for performance, accessibility, and scalability",
-
-        "Implemented logs and monitoring across multiple services to ensure high availability and quick issue resolution",
-        "Enhanced user authentication and security features to protect user data and ensure ISO 27001 compliance",
-        "Contributed to the development of apty's studio chrome extension",
+        "Implemented audit logging and monitoring across multiple services, reducing incident investigation time by ~40%",
+        "Strengthened authentication and authorization flows, contributing to ISO 27001 compliance readiness",
+        "Contributed to the development of the Apty Studio Chrome Extension",
+        "impacting thousands of end users through improved onboarding and in-app guidance",
+        "Improved system reliability and uptime through proactive monitoring and alerting mechanisms",
       ],
       stack: ["React", "TypeScript", "Golang", "NodeJs", "PostgreSQL", "Redis"],
     },
@@ -103,11 +120,15 @@ export const ResumeData = {
         experience: "1 Year 6 Months",
       },
       responsibilities: [
-        "Collaborate with stakeholders to define requirements, success criteria, and system features.",
-        "Collaborated with cross-functional teams to design and implement products that met client requirements",
-        "Architected and developed modern enterprise React applications using best practices",
-        "Ensured applications meet enterprise standards for performance, accessibility, and scalability",
-        "Responsible for shipping multiple proof of concepts that integrated AI technologies to production within tight deadlines",
+        "Shipped multiple AI-powered proof-of-concepts to production under tight deadlines, accelerating time-to-market by ~35%",
+        "Collaborated with cross-functional teams to define requirements, success metrics, and system features across 3+ major initiatives",
+        "Integrated AI workflows into existing products, contributing to measurable customer adoption and engagement growth",
+        "Played a key role in scaling frontend and backend systems to support rapidly growing user traffic",
+        // "Collaborate with stakeholders to define requirements, success criteria, and system features.",
+        // "Collaborated with cross-functional teams to design and implement products that met client requirements",
+        // "Architected and developed modern enterprise React applications using best practices",
+        // "Ensured applications meet enterprise standards for performance, accessibility, and scalability",
+        // "Responsible for shipping multiple proof of concepts that integrated AI technologies to production within tight deadlines",
       ],
       stack: [
         "React",
@@ -136,11 +157,15 @@ export const ResumeData = {
         experience: "1 Year",
       },
       responsibilities: [
-        "Architected and developed a complex financial application featuring numerous metrics and real-time data visualizations",
-        "Built a comprehensive component design system to ensure consistent branding",
-        "Maintained and optimized 5 active projects with real-time data elements",
-        "Developed and maintained project management workflows leveraging Atlassian suite (Jira, Bitbucket, Confluence) for optimized collaboration and tracking.",
-        "Planned migration strategies for projects to SolidJS for improved performance",
+        "Developed the frontend for a multi-tenant financial application serving multiple enterprise clients",
+        "Built a reusable component design system, reducing UI development effort by ~40% and ensuring consistent branding across products",
+        "Improved application scalability and maintainability by introducing shared components and standardized patterns",
+        "Worked closely with backend and QA teams to deliver production-ready releases on schedule",
+        // "Architected and developed a complex financial application featuring numerous metrics and real-time data visualizations",
+        // "Built a comprehensive component design system to ensure consistent branding",
+        // "Maintained and optimized 5 active projects with real-time data elements",
+        // "Developed and maintained project management workflows leveraging Atlassian suite (Jira, Bitbucket, Confluence) for optimized collaboration and tracking.",
+        // "Planned migration strategies for projects to SolidJS for improved performance",
       ],
       stack: [
         "React",
@@ -167,10 +192,11 @@ export const ResumeData = {
         experience: "1 Year",
       },
       responsibilities: [
+        "Automated reporting and analysis workflows using Python, reducing manual effort by ~50%",
+        "Optimized ETL pipelines, cutting dashboard deployment time by ~30% in AWS QuickSight",
+        "Enabled faster decision-making by improving data freshness and reliability for business teams",
         "Developed R scripts to efficiently transform data from S3 to Redshift for Shiny dashboard development",
         "Developed and maintained SQL scripts to create views and tables in Redshift for data analysis in AWS Quicksight",
-        "Automated template and analysis creation processes using python to improve operational efficiency",
-        "Improved existing ETL pipelines to deploy aws quicksight dashboards faster",
       ],
       stack: [
         "Python",
@@ -200,7 +226,7 @@ export const ResumeData = {
             href="https://www.cosmic-zoom.in/"
             target="_blank"
             rel="noreferrer"
-            className="underline hover:text-blue-500"
+            className="underline hover:text-primary"
           >
             Cosmic Zoom
           </a>{" "}
@@ -215,7 +241,7 @@ export const ResumeData = {
             href="https://www.icts.res.in/lectures/cosmic-zoom"
             target="_blank"
             rel="noreferrer"
-            className="underline hover:text-blue-500"
+            className="underline hover:text-primary"
           >
             official ICTS portal
           </a>{" "}
@@ -224,7 +250,7 @@ export const ResumeData = {
             href="https://timesofindia.indiatimes.com/india/icts-launches-virtual-exhibition-cosmiczoom/articleshow/81930776.cms"
             target="_blank"
             rel="noreferrer"
-            className="underline hover:text-blue-500"
+            className="underline hover:text-primary"
           >
             Times of India
           </a>{" "}

@@ -41,7 +41,7 @@ const SocialLinks = ({
         return (
           <div
             key={label}
-            className="group flex gap-1 items-center justify-center text-sm [&>svg]:group-hover:text-blue-500 "
+            className="group flex gap-1 items-center justify-center text-sm [&>svg]:group-hover:text-primary "
           >
             {IconMapper[key]}
             <a
@@ -49,7 +49,7 @@ const SocialLinks = ({
               target="_blank"
               rel="noreferrer"
               title={label}
-              className="text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition text-nowrap"
+              className="text-gray-600 hover:text-primary dark:text-gray-400 transition text-nowrap"
             >
               {label}
             </a>
@@ -61,5 +61,5 @@ const SocialLinks = ({
 };
 
 const ResumeSummary = ({ summary }: { summary: string }) => {
-  return <p className="border-l-4 border-l-blue-500 pl-4">{summary}</p>;
+  return <p className="border-l-4 border-l-primary pl-4">{summary}</p>;
 };
