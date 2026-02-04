@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
+
 import { ICONMAP } from "@/components/common/tech-icon-map";
 import { type Work } from "@/data/work";
+import { ImageDithering } from "@paper-design/shaders-react";
 import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
@@ -12,6 +15,8 @@ type WorkDetailClientProps = {
 };
 
 export function WorkDetailClient({ work }: WorkDetailClientProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <div className="mx-auto max-w-3xl px-6 pb-20 pt-8 md:pt-24">
       <motion.div
@@ -44,29 +49,34 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-        className="relative aspect-video mx-auto rounded-xs overflow-hidden mb-8 border border-dashed"
+        className="relative aspect-video mx-auto rounded-sm bg-neutral-800 dark:bg-transparent overflow-hidden mb-8 dark:border dark:border-dashed"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="relative w-1/2 h-1/2">
-            <Image
-              src={work.image}
-              alt={work.company}
-              priority
-              fill
-              className="object-cover"
-            />
-            {/* <ImageDithering
-              image={work.image}
-              colorBack="#0a0a0a"
-              colorFront="#94ffaf"
-              colorHighlight="#eaff94"
-              originalColors={false}
-              type="8x8"
-              size={2}
-              colorSteps={2}
-              fit="cover"
-              className="absolute inset-0"
-            /> */}
+            {!isHovered ? (
+              <Image
+                src={work.image}
+                alt={work.company}
+                priority
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <ImageDithering
+                image={work.image}
+                colorBack="#0a0a0a"
+                colorFront="#94ffaf"
+                colorHighlight="#eaff94"
+                originalColors={false}
+                type="8x8"
+                size={2}
+                colorSteps={2}
+                fit="cover"
+                className="absolute inset-0"
+              />
+            )}
           </div>
         </div>
       </motion.div>

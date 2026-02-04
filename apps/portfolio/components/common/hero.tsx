@@ -6,10 +6,13 @@ import { LinkedinIcon } from "@workspace/ui/icons/linkedin-icon";
 import { MailIcon } from "@workspace/ui/icons/mail-icon";
 import { cn } from "@workspace/ui/lib/utils";
 import { motion } from "motion/react";
+import { useTheme } from "next-themes";
 
 type HeroProps = React.ComponentProps<"section">;
 
 export const Hero = (props: HeroProps) => {
+  const { theme } = useTheme();
+
   return (
     <section
       {...props}
@@ -20,8 +23,8 @@ export const Hero = (props: HeroProps) => {
           width={100}
           height={100}
           image="/devhaven-logo.svg"
-          colorBack="#0a0a0a"
-          colorTint="#ffffff"
+          colorBack={theme === "dark" ? "#0a0a0a" : "#fafafa"}
+          colorTint={theme === "dark" ? "#ffffff" : "#0a0a0a"}
           shape="daisy"
           repetition={2}
           softness={0.1}
@@ -42,7 +45,7 @@ export const Hero = (props: HeroProps) => {
           <motion.h1 className="text-4xl font-semibold tracking-tight text-black dark:text-white sm:text-5xl">
             Ram Shankar Choudhary
           </motion.h1>
-          <motion.span className="text-base text-neutral-400 dark:text-neutral-600">
+          <motion.span className="text-base text-neutral-500 dark:text-neutral-400">
             {
               "/\u0072\u00E6\u006D \u0283\u00E6\u006E\u006B\u00E6\u0072 \u0074\u0283\u0252\u028C\u0064\u0068\u00E6\u0072\u0079/"
             }
