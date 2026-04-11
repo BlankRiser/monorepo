@@ -3,7 +3,7 @@ export const ResumeData = {
     name: "Ram Shankar Choudhary",
     ipa: "/ræm ʃænkær tʃɒʌdhæry/",
     summary:
-      "4+ years of experience in Software development, architecture and design.",
+      "5+ years of experience in Software development, architecture and design.",
     social: {
       github: {
         label: "@BlankRiser",
@@ -17,6 +17,37 @@ export const ResumeData = {
         label: "ramshankarcodes@gmail.com",
         url: "mailto:ramshankarcodes@gmail.com",
       },
+    },
+  },
+  skills: {
+    languages: {
+      JavaScript: "akar-icons:javascript-fill",
+      TypeScript: "cib:typescript",
+    },
+    frontend: {
+      React: "uil:react",
+      "Tanstack Start": "simple-icons:tanstack",
+      "Next.js": "akar-icons:nextjs-fill",
+      Astro: "devicon-plain:astro",
+      zustand: "devicon-plain:zustand",
+      Electron: "cib:electron",
+      TailwindCSS: "ri:tailwind-css-fill",
+      "Material UI": "mdi:material-ui",
+    },
+    backend: {
+      "Node.js": "mdi:nodejs",
+      Bun: "simple-icons:bun",
+      Elysia: "skill-icons:elysia-light",
+      "better-auth": "bxl:better-auth",
+      Redis: "fontisto:redis",
+      BullMQ: "mdi:mq",
+      PostgreSQL: "simple-icons:postgresql",
+    },
+    tooling: {
+      git: "iconoir:git",
+      Turborepo: "lineicons:turborepo",
+      Docker: "lineicons:docker",
+      // "lint-staged": "catppuccin:lint-staged",
     },
   },
   manifesto: [

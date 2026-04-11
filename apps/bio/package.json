@@ -20,6 +20,7 @@
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
+    "@iconify-icon/react": "^3.0.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3"
   }

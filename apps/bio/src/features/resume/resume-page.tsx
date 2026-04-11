@@ -9,7 +9,7 @@ import { ResumeProjects } from "./resume-projects";
 export const ResumePage = () => {
   return (
     <ResumeLayout className="grid gap-8 print:gap-4">
-      <ResumeHeader header={ResumeData.header} />
+      <ResumeHeader header={ResumeData.header} skills={ResumeData.skills} />
       <ResumeManifesto data={ResumeData.manifesto} />
       <ResumeExperience data={ResumeData.experience} />
       <ResumeEducation data={ResumeData.education} />
