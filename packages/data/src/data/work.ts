@@ -1,26 +1,89 @@
-import { cn } from "@workspace/ui/lib/utils";
-
 export type Work = {
   year: number;
   role: string;
   slug: string;
-  position: string;
+  position: "FTE" | "Freelance" | "Contract";
   tags: Array<string>;
   company: string;
   description: string;
   url: string;
   image: string;
   technologies: Array<string>;
-  brandClasses: string;
   accomplishments?: Array<string>;
   keyDetails?: Array<string>;
 };
 
 export const works: Array<Work> = [
   {
+    year: 2025,
+    slug: "synoptic",
+    role: "Software Engineer",
+    position: "FTE",
+    tags: [],
+    company: "Synoptic Data",
+    description: `Help develop synoptic data viewer`,
+    keyDetails: [""],
+    url: "https://www.synopticdata.com?ref=ram.codes",
+    image: "/images/work/synoptic.png",
+    technologies: [
+      "react",
+      "mui",
+      "sass",
+      "javascript",
+      "typescript",
+      "react-query",
+      "graphql",
+      "zod",
+    ],
+  },
+  {
+    year: 2024,
+    slug: "apty",
+    role: "Senior Software Engineer",
+    position: "FTE",
+    tags: [],
+    company: "Apty",
+    description: `Help develop apty chrome extension and web application.`,
+    keyDetails: [""],
+    url: "https://www.apty.io/?ref=ram.codes",
+    image: "/images/work/apty.png",
+    technologies: [
+      "go",
+      "react",
+      "sass",
+      "javascript",
+      "typescript",
+      "react-query",
+      "graphql",
+      "zod",
+    ],
+  },
+  {
+    year: 2025,
+    slug: "konnect",
+    role: "Fullstack Developer",
+    position: "Freelance",
+    tags: [],
+    company: "Konnect",
+    description: `Assisting in development of a platform for AR based applications.`,
+    keyDetails: [""],
+    url: "https://www.konnectedu.tech/?ref=ram.codes",
+    image: "/images/work/konnect.png",
+    technologies: [
+      "next",
+      "material-ui",
+      "tailwind",
+      "javascript",
+      "typescript",
+      "react-query",
+      "graphql",
+      "zod",
+    ],
+  },
+  {
     year: 2023,
     slug: "ar-genie",
-    role: "Frontend Developer",
+    role: "software Developer",
     position: "Freelance",
     tags: [],
     company: "AR Genie",
@@ -38,16 +101,13 @@ export const works: Array<Work> = [
       "graphql",
       "zod",
     ],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow  --hover:shadow-attri"
-    ),
   },
   {
     year: 2023,
     slug: "attri-ai",
-    role: "Frontend Developer",
+    role: "Software Developer",
     position: "FTE",
-    tags: ["Agency"],
+    tags: ["SaaS"],
     company: "Attri.AI",
     description: `Developing performant and Secure applications.`,
     keyDetails: [
@@ -68,9 +128,6 @@ export const works: Array<Work> = [
       "javascript",
       "zod",
     ],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow  --hover:shadow-attri"
-    ),
   },
   {
     year: 2023,
@@ -81,12 +138,9 @@ export const works: Array<Work> = [
     company: "Studio Rhaya",
     description: `Building a portfolio website for a design studio.`,
     keyDetails: ["Developed a portfolio website for the company"],
-    url: "https://studiorhaya.com/?ref=ram.codes",
+    url: "https://rhaya.ram.codes?ref=ram.codes",
     image: "/images/work/rhaya.png",
     technologies: ["next", "tailwind", "typescript", "framer-motion"],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow  --hover:shadow-attri"
-    ),
   },
   {
     year: 2022,
@@ -115,9 +169,6 @@ export const works: Array<Work> = [
       "zod",
       "nginx",
     ],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow --hover:shadow-midas"
-    ),
   },
   {
     year: 2022,
@@ -145,9 +196,6 @@ export const works: Array<Work> = [
       "zod",
       "stripe",
     ],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow --hover:shadow-potion"
-    ),
   },
   {
     year: 2021,
@@ -160,9 +208,6 @@ export const works: Array<Work> = [
     url: "https://www.opspod.in/?ref=ram.codes",
     image: "/images/work/opspod.png",
     technologies: ["next", "tailwind", "framer-motion", "typescript"],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow --hover:shadow-cosmic-zoom"
-    ),
   },
   {
     year: 2021,
@@ -181,9 +226,6 @@ export const works: Array<Work> = [
       "nginx",
       "google-drive-api",
     ],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow --hover:shadow-cosmic-zoom"
-    ),
   },
   {
     year: 2021,
@@ -203,8 +245,5 @@ export const works: Array<Work> = [
       "elastic cloud compute (ec2)",
       "nginx",
     ],
-    brandClasses: cn(
-      "bg-neutral-950 --border --border-neutral-700 transition-shadow --hover:shadow-nabler"
-    ),
   },
 ];

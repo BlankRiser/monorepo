@@ -2,10 +2,9 @@ import { Footer } from "@/components/common/footer";
 import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 import { Providers } from "@/components/providers";
 import "@workspace/ui/globals.css";
-import "./styles.css";
-import { Metadata } from "next";
-import { ViewTransitions } from "next-view-transitions";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import "./styles.css";
 
 const defaults = {
   name: "ram.codes",
@@ -190,20 +189,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased bg-neutral-50 dark:bg-neutral-950 `}
-        >
-          <Providers>
-            <>
-              {children}
-              <PortfolioCommandBar />
-              <Footer />
-            </>
-          </Providers>
-        </body>
-      </html>
-    </ViewTransitions>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased bg-neutral-50 dark:bg-neutral-950 `}
+      >
+        <Providers>
+          <>
+            {children}
+            <PortfolioCommandBar />
+            <Footer />
+          </>
+        </Providers>
+      </body>
+    </html>
   );
 }

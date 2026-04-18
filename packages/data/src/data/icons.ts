@@ -1,0 +1,86 @@
+/**
+ * icons from https://iconify.design/
+ */
+export const icons = {
+  bun: { simple: "simple-icons:bun", actual: "devicon:bun" },
+  react: { simple: "simple-icons:react", actual: "logos:react" },
+  tailwind: {
+    simple: "simple-icons:tailwindcss",
+    actual: "devicon:tailwindcss",
+  },
+  javascript: {
+    simple: "simple-icons:javascript",
+    actual: "devicon:javascript",
+  },
+  "framer-motion": { simple: "simple-icons:framer", actual: "devicon:motion" },
+  next: { simple: "simple-icons:nextdotjs", actual: "devicon:nextjs" },
+  typescript: {
+    simple: "simple-icons:typescript",
+    actual: "devicon:typescript",
+  },
+  vite: { simple: "file-icons:vite", actual: "devicon:vitejs" },
+  "react-query": {
+    simple: "simple-icons:reactquery",
+    actual: "logos:react-query-icon",
+  },
+  "create-react-app": {
+    simple: "simple-icons:createreactapp",
+    actual: "logos:create-react-app",
+  },
+  "react-hook-form": {
+    simple: "simple-icons:reacthookform",
+    actual: null,
+  },
+  swr: { simple: "simple-icons:swr", actual: "logos:swr" },
+  "material-ui": {
+    simple: "devicon-plain:materialui",
+    actual: "logos:material-ui",
+  },
+  "radix-ui": { simple: "simple-icons:radixui", actual: "bxl:radix-ui" },
+  echarts: { simple: "simple-icons:apacheecharts", actual: null },
+  mapbox: { simple: "simple-icons:mapbox", actual: null },
+  nginx: { simple: "simple-icons:nginx", actual: "logos:nginx" },
+  zod: { simple: "simple-icons:zod", actual: "logos:zod" },
+  remix: { simple: "simple-icons:remix", actual: "devicon:remix" },
+  astro: { simple: "simple-icons:astro", actual: "devicon:astro" },
+  stripe: { simple: "cib:stripe", actual: "logos:stripe" },
+  python: { simple: "simple-icons:python", actual: "logos:python" },
+  express: { simple: "simple-icons:express", actual: "devicon:express" },
+  elysia: { simple: null, actual: "skill-icons:elysia-light" },
+  aws: { simple: "mdi:aws", actual: "logos:aws" },
+  "postgres-sql": {
+    simple: "simple-icons:postgresql",
+    actual: "logos:postgresql",
+  },
+  "simple storage service (s3)": { simple: "logos:aws-s3", actual: null },
+  "elastic cloud compute (ec2)": { simple: "logos:aws-ec2", actual: null },
+  html: { simple: "simple-icons:html5", actual: "devicon:html5" },
+  CSS: { simple: "simple-icons:css3", actual: "devicon:css3" },
+  "google-drive-api": { simple: "logos:google-drive", actual: null },
+  graphql: { simple: "simple-icons:graphql", actual: "logos:graphql" },
+  "google-cloud-storage": {
+    simple: "logos:google-cloud-storage",
+    actual: "null",
+  },
+  redis: { simple: "devicon-plain:redis", actual: "devicon:redis" },
+  "bull-mq": { simple: "mdi:mq", actual: null },
+  docker: { simple: "simple-icons:docker", actual: "logos:docker-icon" },
+  "tanstack-router": { simple: "simple-icons:tanstack", actual: null },
+  vercel: { simple: "simple-icons:vercel", actual: "devicon:vercel" },
+  workos: { simple: null, actual: "logos:workos-icon" },
+  "better-auth": { simple: "simple-icons:betterauth", actual: null },
+  convex: { simple: "simple-icons:convex", actual: null },
+  turborepo: {
+    simple: "simple-icons:turborepo",
+    actual: "vscode-icons:file-type-turbo",
+  },
+  prettier: {
+    simple: "simple-icons:prettier",
+    actual: "material-icon-theme:prettier",
+  },
+  biome: { simple: "simple-icons:biome", actual: "devicon:biome" },
+  vitest: { simple: "devicon-plain:vitest", actual: "devicon:vitest" },
+  eslint: { simple: "simple-icons:eslint", actual: "logos:eslint" },
+  datefns: { simple: "simple-icons:datefns", actual: null },
+  highcharts: { simple: null, actual: "logos:highcharts" },
+};

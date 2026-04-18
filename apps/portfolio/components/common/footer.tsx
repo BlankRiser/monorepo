@@ -73,23 +73,32 @@ const footerLinkClass = cn([
   "hover:text-black dark:hover:text-white transition-colors",
 ]);
 
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 8 },
+  show: { opacity: 1, y: 0 },
+};
 export function Footer(props: FooterProps) {
   return (
     <motion.footer
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true, amount: 0.15 }}
+      variants={container}
       transition={{ duration: 0.7, ease: "easeOut" }}
       className="mx-auto max-w-3xl px-6 py-20 text-sm text-neutral-500"
     >
       <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.02 }}
-          className="flex flex-col gap-3"
-        >
+        <motion.div variants={item} className="flex flex-col gap-3">
           <h3 className="font-medium text-white">Me</h3>
           <Link href="/about" className={footerLinkClass}>
             About
@@ -104,82 +113,58 @@ export function Footer(props: FooterProps) {
             Contact
           </Link>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.08 }}
-          className="flex flex-col gap-3"
-        >
+
+        <motion.div variants={item} className="flex flex-col gap-3">
           <h3 className="font-medium text-white">Projects</h3>
-          {projects.slice(0, 10).map((p, i) => {
-            return (
-              <a
-                key={i}
-                href={p.url}
-                target="_blank"
-                rel="noreferrer"
-                className={footerLinkClass}
-              >
-                {p.label}
-              </a>
-            );
-          })}
+          {projects.slice(0, 10).map((p, i) => (
+            <a
+              key={i}
+              href={p.url}
+              target="_blank"
+              rel="noreferrer"
+              className={footerLinkClass}
+            >
+              {p.label}
+            </a>
+          ))}
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.14 }}
-          className="flex flex-col gap-3"
-        >
+
+        <motion.div variants={item} className="flex flex-col gap-3">
           <h3 className="font-medium text-white">Other</h3>
-          {otherLinks.map((l, i) => {
-            return (
-              <a
-                key={i}
-                href={l.url}
-                target="_blank"
-                rel="noreferrer"
-                className={footerLinkClass}
-              >
-                {l.label}
-              </a>
-            );
-          })}
+          {otherLinks.map((l, i) => (
+            <a
+              key={i}
+              href={l.url}
+              target="_blank"
+              rel="noreferrer"
+              className={footerLinkClass}
+            >
+              {l.label}
+            </a>
+          ))}
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.14 }}
-          className="flex flex-col gap-3"
-        >
+
+        <motion.div variants={item} className="flex flex-col gap-3">
           <h3 className="font-medium text-white">Socials</h3>
-          {socials.map((s, i) => {
-            return (
-              <a
-                key={i}
-                href={s.link}
-                target="_blank"
-                rel="noreferrer"
-                className={footerLinkClass}
-              >
-                {s.platform}
-              </a>
-            );
-          })}
+          {socials.map((s, i) => (
+            <a
+              key={i}
+              href={s.link}
+              target="_blank"
+              rel="noreferrer"
+              className={footerLinkClass}
+            >
+              {s.platform}
+            </a>
+          ))}
         </motion.div>
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.22 }}
+        variants={item}
         className="mt-20 flex flex-col gap-4 sm:flex-row sm:justify-between"
       >
-        <p>© 2025 Ram Shankar</p>
+        <p>© {new Date().getFullYear()} Ram Shankar</p>
         <a
           href="https://bio.ram.codes/resume"
           target="_blank"

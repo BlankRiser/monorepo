@@ -1,3 +1,5 @@
+import { WorkListClient } from "./work-list-client";
+
 export default async function WorkPage() {
-  return <>work page</>;
+  return <WorkListClient />;
 }

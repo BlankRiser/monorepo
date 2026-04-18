@@ -1,5 +1,5 @@
-import { works, type Work } from "@/data/work";
-import { Metadata } from "next";
+import { works } from "@workspace/data";
+import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorkDetailClient } from "./work-detail-client";
 

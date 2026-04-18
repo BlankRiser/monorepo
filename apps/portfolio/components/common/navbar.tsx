@@ -28,7 +28,7 @@ export function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 py-4 backdrop-blur-md bg-white/50 dark:bg-black/50 border-b border-black/5 dark:border-white/5"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center px-6 py-4 backdrop-blur-md border-b border-black/5 dark:border-white/5"
       >
         <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
           <Link href="/" className="text-xl font-bold tracking-tighter">
@@ -44,7 +44,7 @@ export function Navbar() {
                   "text-sm font-medium transition-colors hover:text-black dark:hover:text-white",
                   pathname === link.href
                     ? "text-black dark:text-white"
-                    : "text-neutral-500"
+                    : "text-neutral-500",
                 )}
               >
                 {link.label}
