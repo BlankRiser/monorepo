@@ -6,6 +6,7 @@ export type Work = {
   tags: Array<string>;
   company: string;
   description: string;
+  brief?: string;
   url: string;
   image: string;
   technologies: Array<string>;
@@ -22,6 +23,7 @@ export const works: Array<Work> = [
     tags: [],
     company: "Synoptic Data",
     description: `Help develop synoptic data viewer`,
+    brief: "Engineered weather data viewer for real-time meteorological observations.",
     keyDetails: [""],
     url: "https://www.synopticdata.com?ref=ram.codes",
     image: "/images/work/synoptic.png",
@@ -44,6 +46,7 @@ export const works: Array<Work> = [
     tags: [],
     company: "Apty",
     description: `Help develop apty chrome extension and web application.`,
+    brief: "Built digital adoption platforms across browser extensions and web apps.",
     keyDetails: [""],
     url: "https://www.apty.io/?ref=ram.codes",
     image: "/images/work/apty.png",
@@ -66,6 +69,7 @@ export const works: Array<Work> = [
     tags: [],
     company: "Konnect",
     description: `Assisting in development of a platform for AR based applications.`,
+    brief: "Built full-stack web platform powering interactive AR learning experiences.",
     keyDetails: [""],
     url: "https://www.konnectedu.tech/?ref=ram.codes",
     image: "/images/work/konnect.png",
@@ -83,11 +87,12 @@ export const works: Array<Work> = [
   {
     year: 2023,
     slug: "ar-genie",
-    role: "software Developer",
+    role: "Software Developer",
     position: "Freelance",
     tags: [],
     company: "AR Genie",
     description: `Assisting in development of a platform for AR based applications.`,
+    brief: "Developed web client and real-time interfaces for AR visual assistance.",
     keyDetails: [""],
     url: "https://www.argenie.ai/?ref=ram.codes",
     image: "/images/work/ar-genie.png",
@@ -110,6 +115,7 @@ export const works: Array<Work> = [
     tags: ["SaaS"],
     company: "Attri.AI",
     description: `Developing performant and Secure applications.`,
+    brief: "Developed secure mapping application for meteorological insights.",
     keyDetails: [
       "Developing map based application for meterological data",
       "Part of hiring frontend team",
@@ -137,6 +143,7 @@ export const works: Array<Work> = [
     tags: ["Architecture"],
     company: "Studio Rhaya",
     description: `Building a portfolio website for a design studio.`,
+    brief: "Architected and built motion-rich portfolio site for an architectural studio.",
     keyDetails: ["Developed a portfolio website for the company"],
     url: "https://rhaya.ram.codes?ref=ram.codes",
     image: "/images/work/rhaya.png",
@@ -150,6 +157,7 @@ export const works: Array<Work> = [
     tags: ["Financial Services"],
     company: "Midas Fintech Solutions Pvt Ltd",
     description: `Developing performant and Secure NextJs apps for fintech needs.`,
+    brief: "Created high-performance fintech apps and internal design systems.",
     keyDetails: [
       "Developed internal tools that helped the company to scale",
       "Developed customer facing applications that helped company to acquire more customers",
@@ -186,6 +194,7 @@ export const works: Array<Work> = [
     ],
     company: "Potion Inc",
     description: `Developed an e-commerce platform for international customers.`,
+    brief: "Built global e-commerce storefront with multi-currency checkout and Stripe.",
     url: "https://potion-inc.io/?ref=ram.codes",
     image: "/images/work/potion.png",
     technologies: [
@@ -205,6 +214,7 @@ export const works: Array<Work> = [
     tags: [],
     company: "Opsopod",
     description: `Built an IoT platform landing page.`,
+    brief: "Created responsive landing page and product showcase for an IoT platform.",
     url: "https://www.opspod.in/?ref=ram.codes",
     image: "/images/work/opspod.png",
     technologies: ["next", "tailwind", "framer-motion", "typescript"],
@@ -217,6 +227,7 @@ export const works: Array<Work> = [
     tags: [],
     company: "CosmicZoom.in",
     description: `Developed an e-commerce platform to international customers.`,
+    brief: "Developed international e-commerce platform with automated catalog management.",
     url: "https://potion-inc.io/?ref=ram.codes",
     image: "/images/work/cosmic-zoom.png",
     technologies: [
@@ -235,6 +246,7 @@ export const works: Array<Work> = [
     tags: [],
     company: "Nabler Web Solutions Pvt Ltd",
     description: `Built ETL pipelines and dashboards using Amazon Quicksight.`,
+    brief: "Engineered cloud ETL data pipelines and business intelligence dashboards.",
     url: "https://potion-inc.io/?ref=ram.codes",
     image: "/images/work/nabler.png",
     technologies: [

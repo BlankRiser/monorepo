@@ -1,6 +1,8 @@
 "use client";
 
 import { FloatingNumber } from "@/components/common/floating-number";
+import { Navbar } from "@/components/common/navbar";
+import { PixelSpaceship } from "@/components/common/pixel-spaceship";
 import { Button } from "@workspace/ui/components/button";
 import { motion } from "motion/react";
 import Link from "next/link";
@@ -8,67 +10,68 @@ import Link from "next/link";
 const navigationLinks = [
   { href: "/", label: "Home" },
   { href: "/work", label: "Work" },
-  { href: "/projects", label: "Projects" },
-  { href: "/writings", label: "Writings" },
+  { href: "/writing", label: "Writing" },
+  { href: "/contact", label: "Contact" },
 ];
 
-function NotFoundPage() {
+export default function NotFoundPage() {
   return (
-    <section className="grid min-h-dvh w-full place-items-center px-4">
-      <motion.div
-        className="flex flex-col items-center justify-center gap-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="relative">
-          <h1 className="bg-linear-to-r from-foreground via-foreground/70 to-foreground bg-clip-text text-[10rem] font-bold leading-none tracking-tighter sm:text-[14rem]">
-            <FloatingNumber delay={0}>4</FloatingNumber>
-            <FloatingNumber delay={0.15}>0</FloatingNumber>
-            <FloatingNumber delay={0.3}>4</FloatingNumber>
-          </h1>
-        </div>
+    <>
+      <Navbar />
+      <main className="flex min-h-dvh w-full flex-col items-center justify-center px-6 pt-24 pb-16">
         <motion.div
-          className="flex flex-col items-center gap-2 text-center"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
+          className="flex flex-col items-center justify-center gap-6 text-center max-w-md"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <p className="text-lg font-medium text-foreground/80">
-            Page not found
-          </p>
-          <p className="max-w-md text-sm text-muted-foreground">
-            The page you&apos;re looking for doesn&apos;t exist or has been
-            moved.
-          </p>
-        </motion.div>
+          <PixelSpaceship />
 
-        <motion.nav
-          className="flex flex-wrap items-center justify-center gap-2"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.5 }}
-        >
-          {navigationLinks.map((link, index) => (
-            <motion.div
-              key={link.href}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                delay: 0.8 + index * 0.1,
-                type: "spring",
-                stiffness: 200,
-              }}
-            >
-              <Button asChild variant={"ghost"} size="sm">
-                <Link href={link.href}>{link.label}</Link>
-              </Button>
-            </motion.div>
-          ))}
-        </motion.nav>
-      </motion.div>
-    </section>
+          <div className="relative">
+            <h1 className="font-mono text-8xl font-bold tracking-tighter text-neutral-900 dark:text-neutral-100 sm:text-9xl select-none">
+              <FloatingNumber delay={0}>4</FloatingNumber>
+              <FloatingNumber delay={0.2}>0</FloatingNumber>
+              <FloatingNumber delay={0.4}>4</FloatingNumber>
+            </h1>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-xl font-medium text-neutral-900 dark:text-neutral-100">
+              Lost in deep space
+            </p>
+            <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed max-w-sm">
+              The coordinates you are looking for do not exist or have drifted out of orbit.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <Button asChild size="default" className="rounded-full px-5">
+              <Link href="/">Return Home</Link>
+            </Button>
+            <Button asChild variant="outline" size="default" className="rounded-full px-5">
+              <Link href="/work">Explore Work</Link>
+            </Button>
+          </div>
+
+          <nav
+            aria-label="Direct links"
+            className="flex flex-wrap items-center justify-center gap-1.5 pt-4 text-xs text-neutral-400 dark:text-neutral-500"
+          >
+            <span>Or jump to:</span>
+            {navigationLinks.map((link, index) => (
+              <span key={link.href} className="inline-flex items-center gap-1.5">
+                <Link
+                  href={link.href}
+                  className="hover:text-neutral-900 dark:hover:text-neutral-200 underline-offset-4 hover:underline transition-colors"
+                >
+                  {link.label}
+                </Link>
+                {index < navigationLinks.length - 1 && <span>·</span>}
+              </span>
+            ))}
+          </nav>
+        </motion.div>
+      </main>
+    </>
   );
 }
-
-export default NotFoundPage;

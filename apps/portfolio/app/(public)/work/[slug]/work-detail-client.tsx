@@ -183,10 +183,10 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
               Tech Stack
             </h2>
             <div className="flex flex-wrap gap-3">
-              {work.technologies.map((tech) => {
+              {work.technologies.map((tech, i) => {
                 const icon = icons[tech as keyof typeof icons];
                 return (
-                  <Badge variant="secondary">
+                  <Badge key={i} variant="secondary">
                     {icon && (
                       <Icon
                         icon={icon.actual ?? icon.simple}

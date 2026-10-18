@@ -1,6 +1,7 @@
 import { Hero } from "@/components/common/hero";
 import { Manifesto } from "@/components/common/manifesto";
 import { WorkSection } from "@/components/common/work-section";
+import { ContractSection } from "@/components/common/contract-section";
 import { ProjectsSection } from "@/components/common/projects-section";
 
 export default function Page() {
@@ -9,6 +10,7 @@ export default function Page() {
       <Hero />
       <Manifesto />
       <WorkSection />
+      <ContractSection />
       <ProjectsSection />
     </div>
   );

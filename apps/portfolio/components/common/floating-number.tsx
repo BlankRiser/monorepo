@@ -12,20 +12,16 @@ export function FloatingNumber({
   return (
     <motion.span
       className="inline-block font-mono"
-      initial={{ y: 20, opacity: 0 }}
       animate={{
-        y: [0, -8, 0],
-        opacity: 1,
+        y: [-4, 4, -4],
       }}
       transition={{
-        y: {
-          delay: delay + 0.5,
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-        opacity: { delay, duration: 0.4 },
+        duration: 3.6,
+        delay,
+        repeat: Infinity,
+        ease: "easeInOut",
       }}
+      style={{ willChange: "transform" }}
     >
       {children}
     </motion.span>
