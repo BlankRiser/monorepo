@@ -1,7 +1,8 @@
 "use client";
 
+import { PixelCityscape } from "@/components/common/pixel-cityscape";
 import { cn } from "@workspace/ui/lib/utils";
-import { motion } from "motion/react";
+import { motion, type HTMLMotionProps } from "motion/react";
 import Link from "next/link";
 
 export const projects = [
@@ -67,15 +68,16 @@ export const otherLinks = [
   },
 ];
 
-type FooterProps = React.ComponentProps<"footer">;
+type FooterProps = HTMLMotionProps<"footer">;
 
 const footerLinkClass = cn([
   "hover:text-black dark:hover:text-white transition-colors",
 ]);
 
 const container = {
-  hidden: {},
+  hidden: { opacity: 0 },
   show: {
+    opacity: 1,
     transition: {
       staggerChildren: 0.06,
       delayChildren: 0.05,
@@ -87,6 +89,7 @@ const item = {
   hidden: { opacity: 0, y: 8 },
   show: { opacity: 1, y: 0 },
 };
+
 export function Footer(props: FooterProps) {
   return (
     <motion.footer
@@ -95,11 +98,15 @@ export function Footer(props: FooterProps) {
       viewport={{ once: true, amount: 0.15 }}
       variants={container}
       transition={{ duration: 0.7, ease: "easeOut" }}
-      className="mx-auto max-w-3xl px-6 py-20 text-sm text-neutral-500"
+      className={cn(
+        "mx-auto max-w-3xl px-6 py-20 text-sm text-neutral-500",
+        props.className,
+      )}
+      {...props}
     >
       <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
         <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-white">Me</h3>
+          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Me</h3>
           <Link href="/about" className={footerLinkClass}>
             About
           </Link>
@@ -115,7 +122,7 @@ export function Footer(props: FooterProps) {
         </motion.div>
 
         <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-white">Projects</h3>
+          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Projects</h3>
           {projects.slice(0, 10).map((p, i) => (
             <a
               key={i}
@@ -130,7 +137,7 @@ export function Footer(props: FooterProps) {
         </motion.div>
 
         <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-white">Other</h3>
+          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Other</h3>
           {otherLinks.map((l, i) => (
             <a
               key={i}
@@ -145,7 +152,7 @@ export function Footer(props: FooterProps) {
         </motion.div>
 
         <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-white">Socials</h3>
+          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Socials</h3>
           {socials.map((s, i) => (
             <a
               key={i}
@@ -173,6 +180,10 @@ export function Footer(props: FooterProps) {
         >
           Resume
         </a>
+      </motion.div>
+
+      <motion.div variants={item} className="mt-12">
+        <PixelCityscape />
       </motion.div>
     </motion.footer>
   );
