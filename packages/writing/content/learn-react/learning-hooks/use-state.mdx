@@ -1,0 +1,36 @@
+---
+title: "Learning Hooks: useState and Batching Semantics"
+description: "A draft examination of synchronous batching in React 19 concurrent transitions and queue reconciliation."
+date: "2026-10-25"
+author: "Ram Shankar"
+tags: ["React", "Hooks", "useState", "Draft"]
+draft: true
+toc: false
+series: {
+  title: "Learn React",
+  order: 3
+}
+---
+
+<Callout type="warning" title="Draft Note">
+This post is currently in draft status. The benchmarks and architectural notes below are undergoing verification.
+</Callout>
+
+In React 19, automatic batching applies uniformly across all execution contexts, including asynchronous promises, timeouts, and native DOM listeners.
+
+```tsx
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [flag, setFlag] = useState(false);
+
+  function handleClick() {
+    // Both updates are batched into a single render pass
+    setCount((c) => c + 1);
+    setFlag((f) => !f);
+  }
+
+  return <button onClick={handleClick}>Tick</button>;
+}
+```
+
+Notice that this post has table of contents disabled (`toc: false`), demonstrating granular layout control.

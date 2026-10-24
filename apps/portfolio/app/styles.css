@@ -25,3 +25,59 @@
   animation: 300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
   mix-blend-mode: normal;
 }
+
+/* Shiki code block dual-theme transitions */
+pre.shiki {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+}
+
+.dark pre.shiki {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+.dark pre.shiki span {
+  color: var(--shiki-dark) !important;
+}
+
+/* Ensure code inside pre blocks has no borders or chip styles */
+pre code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+}
+
+pre code .line {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+pre code span {
+  border: none !important;
+}
+
+/* Inline code only: when NOT inside pre */
+:not(pre) > code {
+  display: inline;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border);
+  background-color: oklch(0.96 0 0);
+  padding: 0.125rem 0.375rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8125rem;
+  color: var(--foreground);
+}
+
+.dark :not(pre) > code {
+  background-color: oklch(0.2 0 0);
+  border-color: var(--border);
+  color: var(--foreground);
+}
+

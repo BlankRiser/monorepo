@@ -93,6 +93,10 @@ const pages = [
     label: "Work",
     href: "/work",
   },
+  {
+    label: "Blog",
+    href: "/blog",
+  },
 ];
 
 function PageList() {

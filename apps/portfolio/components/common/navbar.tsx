@@ -12,7 +12,7 @@ import { DevHavenLogo } from "@workspace/ui/icons/devhaven-logo";
 const navLinks = [
   { href: "/about", label: "About" },
   { href: "/work", label: "Work" },
-  { href: "/writing", label: "Writing" },
+  { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
 ];
 
