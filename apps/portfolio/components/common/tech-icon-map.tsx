@@ -60,10 +60,7 @@ export const ICONMAP = {
   ),
   next: (
     <Nextdotjs
-      {...defaultProps}
       data-title="NextJS"
-      size={28}
-      color="white"
       className={defaultStyle}
     />
   ),
@@ -109,10 +106,7 @@ export const ICONMAP = {
   ),
   "radix-ui": (
     <Radixui
-      {...defaultProps}
       data-title="Radix UI"
-      size={28}
-      color="white"
       className={defaultStyle}
     />
   ),

@@ -1,12 +1,9 @@
 "use client";
 
 import {
-  Calculator,
-  Calendar,
   Globe,
   Monitor,
   Moon,
-  Smile,
   Sun,
 } from "lucide-react";
 import * as React from "react";
@@ -59,7 +56,7 @@ export function PortfolioCommandBar({ hidden = true }: { hidden?: boolean }) {
 }
 
 function ThemeList() {
-  const { setTheme, theme } = useTheme();
+  const { setTheme } = useTheme();
 
   return (
     <CommandGroup heading="Themes">

@@ -45,10 +45,8 @@ export const Hero = (props: HeroProps) => {
           <motion.h1 className="text-4xl font-semibold tracking-tight text-black dark:text-white sm:text-5xl">
             Ram Shankar Choudhary
           </motion.h1>
-          <motion.span className="text-base text-neutral-500 dark:text-neutral-400">
-            {
-              "/\u0072\u00E6\u006D \u0283\u00E6\u006E\u006B\u00E6\u0072 \u0074\u0283\u0252\u028C\u0064\u0068\u00E6\u0072\u0079/"
-            }
+          <motion.span className="text-base text-neutral-500 dark:text-neutral-400" lang="in" data-ssml-sub-alias="Ram Shankar Choudhary">
+            {"/\u0072\u00E6\u006D \u0283\u00E6\u006E\u006B\u00E6\u0072 \u0074\u0283\u0252\u028C\u0064\u0068\u00E6\u0072\u0079/"}
           </motion.span>
         </motion.div>
       </div>

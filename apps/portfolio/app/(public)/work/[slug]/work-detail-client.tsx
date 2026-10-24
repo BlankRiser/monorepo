@@ -1,52 +1,131 @@
 "use client";
 
+/* Hallmark · work-detail-client · Case Study Dossier */
+
 import { Icon } from "@iconify-icon/react";
 import { ImageDithering } from "@paper-design/shaders-react";
-import { icons, type Work } from "@workspace/data";
-import { Badge } from "@workspace/ui/components/badge";
-import { motion } from "motion/react";
+import { icons, works, type Work } from "@workspace/data";
+import { cn } from "@workspace/ui/lib/utils";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, Code2, ExternalLink, Layers, Sparkles, } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 
 type WorkDetailClientProps = {
   work: Work;
 };
 
 export function WorkDetailClient({ work }: WorkDetailClientProps) {
-  const [isHovered, setIsHovered] = useState(false);
+  const [ditherActive, setDitherActive] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Find next and previous projects for the case study footer
+  const { prevWork, nextWork } = useMemo(() => {
+    const currentIndex = works.findIndex((w) => w.slug === work.slug);
+    const prev = works[(currentIndex - 1 + works.length) % works.length];
+    const next = works[(currentIndex + 1) % works.length];
+    return { prevWork: prev, nextWork: next };
+  }, [work.slug]);
+
+  const cleanKeyDetails = useMemo(() => {
+    if (!work.keyDetails) return [];
+    return work.keyDetails.filter((d) => Boolean(d && d.trim()));
+  }, [work.keyDetails]);
+
+  const positionLabel =
+    work.position === "FTE"
+      ? "Full-Time Engineering"
+      : work.position === "Freelance"
+        ? "Freelance Engagement"
+        : "Contract Development";
 
   return (
-    <article className="mx-auto max-w-3xl px-6 pb-24 pt-12 md:pt-32">
-      <motion.header
-        initial={{ opacity: 0, y: 16 }}
+    <article className="mx-auto max-w-3xl px-6 pb-24 pt-8 md:pt-16 space-y-12">
+      {/* Top Navigation Bar: Return to Portfolio & External Link */}
+      <motion.nav
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-        className="mb-12 text-center"
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="flex items-center justify-between gap-4 border-b border-neutral-200/70 dark:border-neutral-800/70 pb-4 text-xs font-mono"
+        aria-label="Breadcrumb navigation"
       >
-        <div className="inline-flex items-center gap-2 mb-6 px-3 py-1 bg-neutral-100 dark:bg-neutral-800/80 rounded-full text-sm font-medium text-neutral-600 dark:text-neutral-400">
+        <Link
+          href="/"
+          className={cn([
+            "inline-flex items-center gap-1.5 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100",
+            "transition-colors duration-150 rounded px-1 -mx-1 py-0.5",
+            "focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-500 focus-visible:outline-hidden",
+          ])}
+        >
+          <ArrowLeft className="size-3.5" aria-hidden="true" />
+          <span>Back to portfolio</span>
+        </Link>
+
+        {work.url && (
+          <a
+            href={work.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn([
+              "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-sans font-medium",
+              "border border-neutral-300/80 dark:border-neutral-700/80 bg-neutral-100/60 dark:bg-neutral-900/60",
+              "text-neutral-800 dark:text-neutral-200 hover:text-neutral-900 dark:hover:text-neutral-100 hover:border-neutral-400 dark:hover:border-neutral-600",
+              "transition-colors duration-150 shadow-2xs",
+              "focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-500 focus-visible:outline-hidden",
+            ])}
+          >
+            <span>Visit platform</span>
+            <ArrowUpRight className="size-3.5 text-neutral-400 dark:text-neutral-500" aria-hidden="true" />
+          </a>
+        )}
+      </motion.nav>
+
+      {/* Case Study Header */}
+      <motion.header
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
+        className="flex flex-col gap-3"
+      >
+        <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-neutral-500 dark:text-neutral-400">
           <span>{work.year}</span>
-          <span className="w-1 h-1 rounded-full bg-neutral-400 dark:bg-neutral-600" />
-          <span>{work.position}</span>
+          <span className="text-neutral-300 dark:text-neutral-700">/</span>
+          <span>{positionLabel}</span>
+          {work.tags && work.tags.length > 0 && (
+            <>
+              <span className="text-neutral-300 dark:text-neutral-700">/</span>
+              <span>{work.tags[0]}</span>
+            </>
+          )}
         </div>
+
         <h1
-          className="text-4xl md:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-6"
+          className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 text-balance"
           style={{
             viewTransitionName: `work-title-${work.slug}`,
           }}
         >
           {work.company}
         </h1>
-        <p className="text-xl md:text-2xl font-medium text-neutral-500 dark:text-neutral-500">
+
+        <p className="text-lg sm:text-xl font-medium text-neutral-600 dark:text-neutral-400">
           {work.role}
         </p>
+
+        {work.brief && (
+          <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 text-pretty leading-relaxed pt-1">
+            {work.brief}
+          </p>
+        )}
       </motion.header>
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-        className="relative aspect-video mx-auto rounded-sm bg-neutral-800 dark:bg-transparent overflow-hidden mb-8 dark:border dark:border-dashed"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+        className="group relative aspect-video mx-auto rounded-2xl bg-[#0a0a0a] dark:bg-transparent overflow-hidden mb-8 dark:border dark:border-dashed"
+        onMouseEnter={() => setDitherActive(true)}
+        onMouseLeave={() => setDitherActive(false)}
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <div
@@ -57,13 +136,14 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
               } as React.CSSProperties
             }
           >
-            {!isHovered ? (
+            {!ditherActive ? (
               <Image
                 src={work.image}
-                alt={work.company}
+                alt={`${work.company} platform screenshot`}
                 priority
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 50vw, 384px"
               />
             ) : (
               <ImageDithering
@@ -81,129 +161,213 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
             )}
           </div>
         </div>
+        <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-neutral-950/80 backdrop-blur-md border border-neutral-800 text-[11px] font-mono text-neutral-300 pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity">
+          <Sparkles className="size-3 text-[#94ffaf]" aria-hidden="true" />
+          <span>{ditherActive ? "Dither Art" : "Hover to Dither"}</span>
+        </div>
       </motion.div>
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
+        className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-4 border-y border-neutral-200/70 dark:border-neutral-800/70 text-xs"
+      >
+        <div className="flex flex-col gap-1">
+          <span className="font-mono text-neutral-400 dark:text-neutral-500 text-[11px]">
+            Timeline
+          </span>
+          <span className="font-medium text-neutral-900 dark:text-neutral-100">
+            {work.year}
+          </span>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 md:gap-8">
-        <motion.aside
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.3 }}
-          className="flex flex-col gap-8"
-        >
-          {work.tags.length > 0 && (
-            <div>
-              <h3 className="text-sm border-b border-neutral-200 dark:border-neutral-800 pb-2 font-semibold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wider">
-                Industry & Domain
-              </h3>
-              <ul className="flex flex-col gap-2">
-                {work.tags.map((tag) => (
-                  <li
-                    key={tag}
-                    className="text-[15px] text-neutral-600 dark:text-neutral-400"
-                  >
-                    {tag}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div>
-            <h3 className="text-sm border-b border-neutral-200 dark:border-neutral-800 pb-2 font-semibold text-neutral-900 dark:text-neutral-100 mb-4 uppercase tracking-wider">
-              Links
-            </h3>
+        <div className="flex flex-col gap-1">
+          <span className="font-mono text-neutral-400 dark:text-neutral-500 text-[11px]">
+            Engagement
+          </span>
+          <span className="font-medium text-neutral-900 dark:text-neutral-100">
+            {work.position}
+          </span>
+        </div>
+        <div className="flex flex-col gap-1">
+          <span className="font-mono text-neutral-400 dark:text-neutral-500 text-[11px]">
+            Role
+          </span>
+          <span className="font-medium text-neutral-900 dark:text-neutral-100 truncate">
+            {work.role}
+          </span>
+        </div>
+        <div className="flex flex-col gap-1">
+          <span className="font-mono text-neutral-400 dark:text-neutral-500 text-[11px]">
+            Deployment
+          </span>
+          {work.url ? (
             <a
               href={work.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 text-[15px] font-medium text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100 transition-colors"
+              className="font-medium text-neutral-900 dark:text-neutral-100 hover:underline truncate inline-flex items-center gap-1"
             >
-              Visit Platform
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-              >
-                <path d="M7 7h10v10" />
-                <path d="M7 17 17 7" />
-              </svg>
+              <span>Live Site</span>
+              <ExternalLink className="size-3" aria-hidden="true" />
             </a>
-          </div>
-        </motion.aside>
-        <div className="flex flex-col gap-12">
-          <motion.section
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-          >
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-6">
-              Overview
-            </h2>
-            <div className="prose prose-neutral dark:prose-invert max-w-none text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
-              <p>{work.description}</p>
-            </div>
-          </motion.section>
-          {work.keyDetails && work.keyDetails.filter(Boolean).length > 0 && (
-            <motion.section
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
-            >
-              <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-6">
-                Impact & Work Delivered
-              </h2>
-              <ul className="space-y-4">
-                {work.keyDetails.filter(Boolean).map((detail, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-4 text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed"
-                  >
-                    <div className="shrink-0 mt-2 flex items-center justify-center size-5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 font-medium text-[11px]">
-                      {idx + 1}
-                    </div>
-                    <span>{detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.section>
+          ) : (
+            <span className="text-neutral-500">Internal System</span>
           )}
+        </div>
+      </motion.div>
+      <div className="flex flex-col gap-10">
+        <motion.section
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+          className="flex flex-col gap-3"
+        >
+          <div className="flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+            <Layers className="size-4" aria-hidden="true" />
+            <h2 className="text-lg font-medium tracking-tight">Overview</h2>
+          </div>
+          <p className="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 leading-relaxed text-pretty">
+            {work.description}
+          </p>
+        </motion.section>
+        {cleanKeyDetails.length > 0 && (
           <motion.section
-            initial={{ opacity: 0, y: 16 }}
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
+            className="flex flex-col gap-3"
           >
-            <h2 className="text-2xl font-semibold text-neutral-900 dark:text-neutral-100 mb-6">
-              Tech Stack
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {work.technologies.map((tech, i) => {
-                const icon = icons[tech as keyof typeof icons];
-                return (
-                  <Badge key={i} variant="secondary">
-                    {icon && (
-                      <Icon
-                        icon={icon.actual ?? icon.simple}
-                        width={18}
-                        height={18}
-                      />
-                    )}
-                    <span className="text-sm capitalize">
-                      {tech.replace(/-/g, " ")}
-                    </span>
-                  </Badge>
-                );
-              })}
+            <div className="flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+              <Check className="size-4" aria-hidden="true" />
+              <h2 className="text-lg font-medium tracking-tight">
+                Work Delivered & Technical Scope
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 gap-2.5">
+              {cleanKeyDetails.map((detail, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-start gap-3 p-3.5 rounded-xl border border-neutral-200/70 dark:border-neutral-800/70 bg-neutral-100/40 dark:bg-neutral-900/30"
+                >
+                  <span className="p-0.5 rounded-full bg-[#94ffaf]/20 text-neutral-900 dark:text-[#94ffaf] shrink-0 mt-0.5">
+                    <Check className="size-3" aria-hidden="true" />
+                  </span>
+                  <span className="text-xs sm:text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                    {detail}
+                  </span>
+                </div>
+              ))}
             </div>
           </motion.section>
-        </div>
+        )}
+        {work.tags && work.tags.length > 0 && (
+          <motion.section
+            initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+            className="flex flex-col gap-2.5"
+          >
+            <span className="font-mono text-[11px] font-medium text-neutral-500 dark:text-neutral-400">
+              Industry & Focus Domains
+            </span>
+            <div className="flex flex-wrap gap-1.5">
+              {work.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs px-2.5 py-1 rounded-md border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-100/50 dark:bg-neutral-900/40 text-neutral-700 dark:text-neutral-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.section>
+        )}
+        <motion.section
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut", delay: 0.35 }}
+          className="flex flex-col gap-3"
+        >
+          <div className="flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+            <Code2 className="size-4" aria-hidden="true" />
+            <h2 className="text-lg font-medium tracking-tight">Tech Stack</h2>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {work.technologies.map((tech, i) => {
+              const icon = icons[tech as keyof typeof icons];
+              return (
+                <div
+                  key={i}
+                  className={cn([
+                    "inline-flex items-center gap-2 px-3 py-1.5 rounded-lg",
+                    "border border-neutral-200/80 dark:border-neutral-800/80",
+                    "bg-neutral-100/50 dark:bg-neutral-900/40",
+                    "text-xs font-mono text-neutral-800 dark:text-neutral-200",
+                  ])}
+                >
+                  {icon && (
+                    <Icon
+                      icon={icon.actual ?? icon.simple}
+                      width={15}
+                      height={15}
+                      className="shrink-0"
+                    />
+                  )}
+                  <span>{tech.replace(/-/g, " ")}</span>
+                </div>
+              );
+            })}
+          </div>
+        </motion.section>
       </div>
+      <motion.footer
+        initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+        className="pt-10 border-t border-neutral-200/70 dark:border-neutral-800/70 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4"
+        aria-label="Other case studies"
+      >
+        {prevWork && (
+          <Link
+            href={`/work/${prevWork.slug}`}
+            className={cn([
+              "group flex flex-col gap-1 p-3.5 rounded-xl border border-neutral-200/70 dark:border-neutral-800/70",
+              "bg-neutral-100/40 dark:bg-neutral-900/30 hover:border-neutral-300 dark:hover:border-neutral-700",
+              "transition-colors duration-150 flex-1 text-left",
+              "focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-500 focus-visible:outline-hidden",
+            ])}
+          >
+            <div className="flex items-center gap-1.5 font-mono text-[11px] text-neutral-400 dark:text-neutral-500">
+              <ArrowLeft className="size-3 group-hover:-translate-x-0.5 transition-transform" />
+              <span>Previous project</span>
+            </div>
+            <span className="font-medium text-sm text-neutral-900 dark:text-neutral-100 group-hover:underline">
+              {prevWork.company}
+            </span>
+          </Link>
+        )}
+        {nextWork && (
+          <Link
+            href={`/work/${nextWork.slug}`}
+            className={cn([
+              "group flex flex-col gap-1 p-3.5 rounded-xl border border-neutral-200/70 dark:border-neutral-800/70",
+              "bg-neutral-100/40 dark:bg-neutral-900/30 hover:border-neutral-300 dark:hover:border-neutral-700",
+              "transition-colors duration-150 flex-1 text-right sm:items-end",
+              "focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-500 focus-visible:outline-hidden",
+            ])}
+          >
+            <div className="flex items-center gap-1.5 font-mono text-[11px] text-neutral-400 dark:text-neutral-500">
+              <span>Next project</span>
+              <ArrowRight className="size-3 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+            <span className="font-medium text-sm text-neutral-900 dark:text-neutral-100 group-hover:underline">
+              {nextWork.company}
+            </span>
+          </Link>
+        )}
+      </motion.footer>
     </article>
   );
 }

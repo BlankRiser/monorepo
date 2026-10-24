@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@workspace/ui/lib/utils";
-import { HTMLMotionProps, motion } from "motion/react";
+import { type HTMLMotionProps, motion } from "motion/react";
 
 export const Manifesto = (props: HTMLMotionProps<"section">) => {
   return (
