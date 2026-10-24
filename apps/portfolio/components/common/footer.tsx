@@ -2,7 +2,8 @@
 
 import { PixelCityscape } from "@/components/common/pixel-cityscape";
 import { cn } from "@workspace/ui/lib/utils";
-import { motion, type HTMLMotionProps } from "motion/react";
+import { ArrowUp } from "lucide-react";
+import { type HTMLMotionProps, motion, useReducedMotion, type Variants } from "motion/react";
 import Link from "next/link";
 
 export const projects = [
@@ -70,48 +71,68 @@ export const otherLinks = [
 
 type FooterProps = HTMLMotionProps<"footer">;
 
-const footerLinkClass = cn([
-  "hover:text-black dark:hover:text-white transition-colors",
-]);
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 8 },
-  show: { opacity: 1, y: 0 },
-};
+const footerLinkClass = cn(
+  "text-sm text-neutral-600 transition-colors hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 rounded-xs dark:text-neutral-400 dark:hover:text-neutral-100 dark:focus-visible:ring-neutral-600",
+);
 
 export function Footer(props: FooterProps) {
+  const currentYear = new Date().getFullYear();
+  const shouldReduceMotion = useReducedMotion();
+
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const containerVariants: Variants = {
+    hidden: shouldReduceMotion ? { opacity: 1 } : { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : {
+            staggerChildren: 0.05,
+            delayChildren: 0.05,
+          },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
     <motion.footer
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
-      variants={container}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.1 }}
+      variants={containerVariants}
       className={cn(
-        "mx-auto max-w-3xl px-6 py-20 text-sm text-neutral-500",
+        "mx-auto max-w-3xl px-6 pt-16 pb-12 text-sm text-neutral-500",
         props.className,
       )}
       {...props}
     >
-      <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
-        <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Me</h3>
+      {/* Directory Grid */}
+      <div className="grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-6">
+        {/* Navigation */}
+        <motion.div variants={itemVariants} className="flex flex-col gap-2.5">
+          <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+            Index
+          </h3>
           <Link href="/about" className={footerLinkClass}>
             About
           </Link>
-          <Link href="/projects" className={footerLinkClass}>
-            Projects
+          <Link href="/work" className={footerLinkClass}>
+            Work
           </Link>
           <Link href="/writing" className={footerLinkClass}>
             Writing
@@ -119,16 +140,27 @@ export function Footer(props: FooterProps) {
           <Link href="/contact" className={footerLinkClass}>
             Contact
           </Link>
+          <a
+            href="https://bio.ram.codes/resume"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={footerLinkClass}
+          >
+            Resume
+          </a>
         </motion.div>
 
-        <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Projects</h3>
-          {projects.slice(0, 10).map((p, i) => (
+        {/* Selected Projects */}
+        <motion.div variants={itemVariants} className="flex flex-col gap-2.5">
+          <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+            Projects
+          </h3>
+          {projects.map((p) => (
             <a
-              key={i}
+              key={p.label}
               href={p.url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={footerLinkClass}
             >
               {p.label}
@@ -136,29 +168,51 @@ export function Footer(props: FooterProps) {
           ))}
         </motion.div>
 
-        <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Other</h3>
-          {otherLinks.map((l, i) => (
+        {/* Products and Ecosystem */}
+        <motion.div variants={itemVariants} className="flex flex-col gap-2.5">
+          <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+            Products
+          </h3>
+          {otherLinks.map((l) => (
             <a
-              key={i}
+              key={l.label}
               href={l.url}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={footerLinkClass}
             >
               {l.label}
             </a>
           ))}
+          <a
+            href="https://github.com/BlankRiser"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={footerLinkClass}
+          >
+            All Repositories
+          </a>
+          <a
+            href="https://www.npmjs.com/~devhaven"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={footerLinkClass}
+          >
+            npm Packages
+          </a>
         </motion.div>
 
-        <motion.div variants={item} className="flex flex-col gap-3">
-          <h3 className="font-medium text-neutral-900 dark:text-neutral-100">Socials</h3>
-          {socials.map((s, i) => (
+        {/* Connect & Channels */}
+        <motion.div variants={itemVariants} className="flex flex-col gap-2.5">
+          <h3 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+            Connect
+          </h3>
+          {socials.map((s) => (
             <a
-              key={i}
+              key={s.platform}
               href={s.link}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className={footerLinkClass}
             >
               {s.platform}
@@ -167,23 +221,30 @@ export function Footer(props: FooterProps) {
         </motion.div>
       </div>
 
-      <motion.div
-        variants={item}
-        className="mt-20 flex flex-col gap-4 sm:flex-row sm:justify-between"
-      >
-        <p>© {new Date().getFullYear()} Ram Shankar</p>
-        <a
-          href="https://bio.ram.codes/resume"
-          target="_blank"
-          rel="noreferrer"
-          className={footerLinkClass}
-        >
-          Resume
-        </a>
+      {/* Skyline Horizon */}
+      <motion.div variants={itemVariants} className="mt-14">
+        <PixelCityscape />
       </motion.div>
 
-      <motion.div variants={item} className="mt-12">
-        <PixelCityscape />
+      {/* Colophon & Bottom Bar */}
+      <motion.div
+        variants={itemVariants}
+        className="mt-8 flex flex-col items-start justify-between gap-4 border-t border-neutral-200/70 pt-6 text-xs text-neutral-500 sm:flex-row sm:items-center dark:border-neutral-800/70 dark:text-neutral-400"
+      >
+        <p>© {currentYear} Ram Shankar Choudhary. All rights reserved.</p>
+
+        <div className="flex items-center gap-4">
+          <span>Bengaluru, India (UTC+5:30)</span>
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="inline-flex cursor-pointer items-center gap-1 text-neutral-600 transition-colors hover:text-neutral-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 rounded-xs dark:text-neutral-400 dark:hover:text-neutral-100 dark:focus-visible:ring-neutral-600"
+            aria-label="Scroll back to top"
+          >
+            Top
+            <ArrowUp className="h-3 w-3" aria-hidden="true" />
+          </button>
+        </div>
       </motion.div>
     </motion.footer>
   );

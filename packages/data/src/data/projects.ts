@@ -1,4 +1,12 @@
-export const projects = [
+export type Project = {
+  label: string;
+  description: string;
+  url: string;
+  github?: string;
+  npm?: string;
+};
+
+export const projects: Project[] = [
   {
     label: "Mausam",
     description: "A weather application with a clean interface",
@@ -9,12 +17,14 @@ export const projects = [
     label: "Unit Conversion SDK",
     description: "NPM package for unit conversions",
     url: "https://www.npmjs.com/package/@devhaven/unit-conversion",
+    npm: "https://www.npmjs.com/package/@devhaven/unit-conversion",
     github: "https://github.com/BlankRiser/unit-conversion",
   },
   {
     label: "Synoptic SDK",
     description: "SDK for synoptic data APIs",
     url: "https://www.npmjs.com/package/@devhaven/synoptic-sdk",
+    npm: "https://www.npmjs.com/package/@devhaven/synoptic-sdk",
     github: "https://github.com/BlankRiser/synoptic-sdk",
   },
   {
@@ -36,5 +46,3 @@ export const projects = [
     github: "https://github.com/BlankRiser/DevHaven",
   },
 ];
-
-export type Project = (typeof projects)[number];

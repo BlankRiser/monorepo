@@ -195,7 +195,7 @@ export const works: Array<Work> = [
     company: "Potion Inc",
     description: `Developed an e-commerce platform for international customers.`,
     brief: "Built global e-commerce storefront with multi-currency checkout and Stripe.",
-    url: "https://potion-inc.io/?ref=ram.codes",
+    url: "https://potion.ram.codes?ref=ram.codes",
     image: "/images/work/potion.png",
     technologies: [
       "framer-motion",
