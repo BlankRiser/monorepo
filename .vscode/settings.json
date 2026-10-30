@@ -8,5 +8,8 @@
     "**/bower_components": true,
     "**/*.code-search": true,
     "**/.turbo": true
-  }
+  },
+  "cSpell.words": [
+    "shiki"
+  ]
 }
