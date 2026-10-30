@@ -3,9 +3,10 @@ import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { cn } from "@workspace/ui/lib/utils";
 
-interface CustomLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface CustomLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }
 

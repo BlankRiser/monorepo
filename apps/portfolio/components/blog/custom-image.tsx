@@ -2,10 +2,11 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@workspace/ui/lib/utils";
 
-interface CustomImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface CustomImageProps
+  extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, "width" | "height"> {
   caption?: string;
-  width?: number;
-  height?: number;
+  width?: number | string;
+  height?: number | string;
 }
 
 export function CustomImage({
@@ -20,16 +21,28 @@ export function CustomImage({
   if (!src) return null;
 
   const srcString = typeof src === "string" ? src : "";
+  const numericWidth =
+    typeof width === "number"
+      ? width
+      : typeof width === "string" && !Number.isNaN(Number(width))
+        ? Number(width)
+        : undefined;
+  const numericHeight =
+    typeof height === "number"
+      ? height
+      : typeof height === "string" && !Number.isNaN(Number(height))
+        ? Number(height)
+        : undefined;
 
   return (
     <figure className="my-8 overflow-hidden">
       <div className="relative overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-100 dark:bg-neutral-900">
-        {width && height && srcString ? (
+        {numericWidth && numericHeight && srcString ? (
           <Image
             src={srcString}
             alt={alt}
-            width={width}
-            height={height}
+            width={numericWidth}
+            height={numericHeight}
             className={cn("h-auto w-full object-cover", className)}
           />
         ) : (
@@ -39,6 +52,8 @@ export function CustomImage({
             alt={alt}
             loading="lazy"
             decoding="async"
+            width={width}
+            height={height}
             className={cn("h-auto w-full object-cover", className)}
             {...props}
           />

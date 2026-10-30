@@ -1,4 +1,5 @@
 import React from "react";
+import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { MDXComponents } from "mdx/types";
 import { Callout } from "@/components/blog/callout";
 import { CustomImage } from "@/components/blog/custom-image";
@@ -28,8 +29,9 @@ function getNodeText(node: React.ReactNode): string {
   return "";
 }
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
+    ...defaultMdxComponents,
     h1: ({ children, className, ...props }) => (
       <h1
         className={cn(
@@ -234,4 +236,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     ...components,
   };
+}
+
+export const useMDXComponents = getMDXComponents;
+
+declare global {
+  type MDXProvidedComponents = ReturnType<typeof getMDXComponents>;
 }
