@@ -8,6 +8,7 @@ export interface BlogPostFrontmatter {
   draft?: boolean;
   toc?: boolean;
   coverImage?: string;
+  image?: string;
   series?: {
     title?: string;
     order?: number;

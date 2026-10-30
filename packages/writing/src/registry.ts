@@ -20,10 +20,33 @@ export const postRegistry: Record<string, () => Promise<MDXModule>> = {
     import(
       "../content/learn-react/learning-hooks/use-state.mdx"
     ) as unknown as Promise<MDXModule>,
+  "aws-cloud-practitioner": () =>
+    import(
+      "../content/aws-cloud-practitioner.mdx"
+    ) as unknown as Promise<MDXModule>,
+  "fullstack-resources": () =>
+    import(
+      "../content/fullstack-resources.mdx"
+    ) as unknown as Promise<MDXModule>,
+  "multiple-github-account": () =>
+    import(
+      "../content/multiple-github-account.mdx"
+    ) as unknown as Promise<MDXModule>,
+  "novice-to-sql-pro": () =>
+    import("../content/novice-to-sql-pro.mdx") as unknown as Promise<MDXModule>,
+  "please-learn-git": () =>
+    import("../content/please-learn-git.mdx") as unknown as Promise<MDXModule>,
+  "react-hooks": () =>
+    import("../content/react-hooks.mdx") as unknown as Promise<MDXModule>,
+  uses: () => import("../content/uses.mdx") as unknown as Promise<MDXModule>,
+  "using-free-oracle-compute": () =>
+    import(
+      "../content/using-free-oracle-compute.mdx"
+    ) as unknown as Promise<MDXModule>,
 };
 
 export async function loadPostComponent(
-  slugPath: string
+  slugPath: string,
 ): Promise<MDXModule | null> {
   const loader = postRegistry[slugPath];
   if (loader) {

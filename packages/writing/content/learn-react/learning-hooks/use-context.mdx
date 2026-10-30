@@ -6,10 +6,7 @@ author: "Ram Shankar"
 tags: ["React", "Hooks", "useContext", "Architecture"]
 draft: false
 toc: true
-series: {
-  title: "Learn React",
-  order: 2
-}
+series: { title: "Learn React", order: 2 }
 ---
 
 React Context is frequently misunderstood as a global state management mechanism. Context is fundamentally an ambient dependency injection primitive designed for low-frequency updates.
@@ -26,7 +23,7 @@ graph TD
     Content --> CardA[Feature Card A]
     Content --> CardB[Feature Card B]
     CardB --> Consumer[Context Consumer Hook]
-    
+
     style ConfigProvider stroke:#06b6d4,stroke-width:2px
     style Consumer stroke:#10b981,stroke-width:2px
 ```
@@ -43,7 +40,9 @@ type Theme = "light" | "dark" | "system";
 type Action = { type: "SET_THEME"; payload: Theme };
 
 const ThemeStateContext = createContext<Theme | undefined>(undefined);
-const ThemeDispatchContext = createContext<React.Dispatch<Action> | undefined>(undefined);
+const ThemeDispatchContext = createContext<React.Dispatch<Action> | undefined>(
+  undefined,
+);
 
 function themeReducer(state: Theme, action: Action): Theme {
   switch (action.type) {
@@ -76,7 +75,8 @@ export function useThemeState(): Theme {
 ```
 
 <Callout type="tip" title="Dual Provider Split">
-Splitting state and dispatch ensures that components only reading action dispatchers are never re-rendered when the state value evolves.
+  Splitting state and dispatch ensures that components only reading action
+  dispatchers are never re-rendered when the state value evolves.
 </Callout>
 
 ## Mathematical Convergence of Update Costs

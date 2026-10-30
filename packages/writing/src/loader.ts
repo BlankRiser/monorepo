@@ -13,7 +13,7 @@ export function resolveContentDir(): string {
   try {
     const fromModule = path.resolve(
       path.dirname(new URL(import.meta.url).pathname),
-      "../content"
+      "../content",
     );
     if (fs.existsSync(fromModule)) {
       return fromModule;
@@ -106,6 +106,19 @@ function scanDirectory(dir: string, baseDir: string): ScanFile[] {
   return results;
 }
 
+function formatDateString(value: unknown): string {
+  if (value instanceof Date) {
+    return value.toISOString().split("T")[0] || "";
+  }
+  if (typeof value === "string") {
+    return value.trim();
+  }
+  if (value) {
+    return String(value);
+  }
+  return new Date().toISOString().split("T")[0] || "";
+}
+
 export function getAllPosts({
   includeDrafts = process.env.NODE_ENV !== "production" ||
     process.env.SHOW_DRAFTS === "true",
@@ -134,6 +147,11 @@ export function getAllPosts({
       continue;
     }
 
+    const dateStr = formatDateString(frontmatter.date);
+    const updatedAtStr = frontmatter.updatedAt
+      ? formatDateString(frontmatter.updatedAt)
+      : undefined;
+
     posts.push({
       slug,
       slugPath,
@@ -141,13 +159,13 @@ export function getAllPosts({
       frontmatter: {
         title: frontmatter.title || slug[slug.length - 1] || "Untitled",
         description: frontmatter.description || "",
-        date: frontmatter.date || new Date().toISOString(),
-        updatedAt: frontmatter.updatedAt,
+        date: dateStr,
+        updatedAt: updatedAtStr,
         author: frontmatter.author || "Ram Shankar",
         tags: frontmatter.tags || [],
         draft: Boolean(frontmatter.draft),
         toc: frontmatter.toc !== false,
-        coverImage: frontmatter.coverImage,
+        coverImage: frontmatter.coverImage || frontmatter.image,
         series: frontmatter.series,
       },
       readingTime: calculateReadingTime(parsed.content),
@@ -175,7 +193,7 @@ export function getAllPosts({
 }
 
 export function getPostBySlug(
-  slugParam: string[] | string
+  slugParam: string[] | string,
 ): BlogPostMeta | null {
   const slugArray = Array.isArray(slugParam)
     ? slugParam
@@ -195,7 +213,7 @@ export function getChildPosts(seriesSlugPath: string): BlogPostMeta[] {
       (p) =>
         p.slugPath !== seriesSlugPath &&
         p.slugPath.startsWith(prefix) &&
-        !p.isSeriesRoot
+        !p.isSeriesRoot,
     )
     .sort((a, b) => {
       const orderA = a.frontmatter.series?.order ?? 999;
@@ -209,7 +227,7 @@ export function getChildPosts(seriesSlugPath: string): BlogPostMeta[] {
 }
 
 export function getSeriesNavigation(
-  currentSlugPath: string
+  currentSlugPath: string,
 ): SeriesNavigation | null {
   const currentPost = getPostBySlug(currentSlugPath);
   if (!currentPost) return null;
@@ -224,8 +242,7 @@ export function getSeriesNavigation(
     .filter((p) => {
       if (currentPost.frontmatter.series?.title) {
         return (
-          p.frontmatter.series?.title ===
-          currentPost.frontmatter.series?.title
+          p.frontmatter.series?.title === currentPost.frontmatter.series?.title
         );
       }
       return seriesRootPath ? p.slugPath.startsWith(seriesRootPath) : false;
@@ -243,7 +260,7 @@ export function getSeriesNavigation(
   if (allSeriesPosts.length <= 1) return null;
 
   const currentIndex = allSeriesPosts.findIndex(
-    (p) => p.slugPath === currentSlugPath
+    (p) => p.slugPath === currentSlugPath,
   );
   return {
     seriesTitle:

@@ -40,8 +40,8 @@ const withMDX = createMDX({
         rehypeShiki,
         {
           themes: {
-            light: "github-light",
-            dark: "github-dark",
+            light: "vitesse-light",
+            dark: "vitesse-dark",
           },
           addLanguageClass: true,
           transformers: [
