@@ -1,3 +1,4 @@
+import { BoxMeshBackground } from "@/components/common/box-mesh-background";
 import { Footer } from "@/components/common/footer";
 import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 import { Providers } from "@/components/providers";
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
     capable: true,
   },
   verification: {
-    google: "kPp5_rgQwPy\][o 9HufNkiJBXOR99eZE2sNbqbc22twXrcw",
+    google: "kPp5_rgQwPy][o 9HufNkiJBXOR99eZE2sNbqbc22twXrcw",
     // yandex: ['DATA_TODO'],
     other: {
       "msvalidate.01": ["C73F80B652B239B3972D7DEF2D58D0BB"],
@@ -191,8 +192,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased bg-neutral-50 dark:bg-neutral-950 `}
+        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased bg-neutral-50 dark:bg-neutral-950 relative min-h-screen`}
       >
+        <BoxMeshBackground />
         <Providers>
           <>
             {children}
