@@ -82,22 +82,22 @@ pre code span {
 }
 
 :root {
-  --mesh-size: 10px;
-  --mesh-line: rgba(15, 23, 42, 0.032);
-  /* #94ffaf (rgb 148, 255, 175) subtle variants for light mode */
-  --ambient-tint-1: rgba(148, 255, 175, 0.42);
-  --ambient-tint-2: rgba(167, 255, 192, 0.25);
-  --ambient-tint-3: rgba(188, 255, 208, 0.12);
-  --ambient-tint-4: rgba(220, 255, 230, 0.03);
+  --mesh-size: 24px;
+  --mesh-line: rgba(15, 23, 42, 0.016);
+  /* #94ffaf (rgb 148, 255, 175) delicate, non-intrusive ambient variants for light mode */
+  --ambient-tint-1: rgba(148, 255, 175, 0.12);
+  --ambient-tint-2: rgba(167, 255, 192, 0.06);
+  --ambient-tint-3: rgba(188, 255, 208, 0.02);
+  --ambient-tint-4: transparent;
 }
 
 .dark {
-  --mesh-line: rgba(255, 255, 255, 0.026);
+  --mesh-line: rgba(255, 255, 255, 0.014);
   /* #94ffaf (rgb 148, 255, 175) subtle soft glow variants for dark mode */
-  --ambient-tint-1: rgba(148, 255, 175, 0.08);
-  --ambient-tint-2: rgba(110, 240, 145, 0.03);
-  --ambient-tint-3: rgba(74, 222, 128, 0.008);
-  --ambient-tint-4: rgba(34, 197, 94, 0.004);
+  --ambient-tint-1: rgba(148, 255, 175, 0.05);
+  --ambient-tint-2: rgba(110, 240, 145, 0.018);
+  --ambient-tint-3: rgba(74, 222, 128, 0.005);
+  --ambient-tint-4: transparent;
 }
 
 .box-mesh-background {
@@ -122,13 +122,13 @@ pre code span {
   top: 0;
   left: 0;
   right: 0;
-  height: 720px;
-  max-height: 85vh;
+  height: 600px;
+  max-height: 75vh;
   width: 100%;
   pointer-events: none;
   z-index: 1;
   background: radial-gradient(
-    ellipse 75% 560px at 50% -5%,
+    ellipse 75% 500px at 50% -5%,
     var(--ambient-tint-1) 0%,
     var(--ambient-tint-2) 28%,
     var(--ambient-tint-3) 54%,
@@ -137,7 +137,7 @@ pre code span {
   );
 }
 
-/* 2. Geometric 5x5px box-mesh wireframe grid (Layered on top of atmospheric lighting) */
+/* 2. Geometric wireframe grid with graceful feather fade to maximize readability */
 .box-mesh-background::after {
   content: "";
   position: absolute;
@@ -162,14 +162,26 @@ pre code span {
       transparent var(--mesh-size)
     );
   background-position: center top;
+  -webkit-mask-image: radial-gradient(
+    ellipse 90% 75% at 50% 0%,
+    black 25%,
+    rgba(0, 0, 0, 0.45) 55%,
+    transparent 90%
+  );
+  mask-image: radial-gradient(
+    ellipse 90% 75% at 50% 0%,
+    black 25%,
+    rgba(0, 0, 0, 0.45) 55%,
+    transparent 90%
+  );
 }
 
 /* Responsive adjustment for mobile screens */
 @media (max-width: 640px) {
   .box-mesh-background::before {
-    height: 480px;
+    height: 400px;
     background: radial-gradient(
-      ellipse 95% 420px at 50% 0%,
+      ellipse 95% 340px at 50% 0%,
       var(--ambient-tint-1) 0%,
       var(--ambient-tint-2) 32%,
       var(--ambient-tint-3) 60%,
