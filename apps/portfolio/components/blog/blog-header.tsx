@@ -2,14 +2,13 @@ import React from "react";
 import Link from "next/link";
 import type { BlogPostMeta } from "@workspace/writing";
 import { AlertCircle, Calendar, Clock, User } from "lucide-react";
-import { TableOfContents } from "./table-of-contents";
 
 interface BlogHeaderProps {
   post: BlogPostMeta;
 }
 
 export function BlogHeader({ post }: BlogHeaderProps) {
-  const { frontmatter, slug, readingTime, toc } = post;
+  const { frontmatter, slug, readingTime } = post;
 
   // Build breadcrumb segments
   const breadcrumbs = [
@@ -36,8 +35,7 @@ export function BlogHeader({ post }: BlogHeaderProps) {
       <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-neutral-500">
         {breadcrumbs.map((crumb, index) => (
           <React.Fragment key={crumb.href}>
-            {index > 0 && <span className="text-neutral-300 dark:text-neutral-700">/</span>}
-            <Link
+            {index > 0 && <span className="text-neutral-300 dark:text-neutral-700">/</span>}\n            <Link
               href={crumb.href}
               className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
             >
@@ -53,43 +51,26 @@ export function BlogHeader({ post }: BlogHeaderProps) {
 
       {/* Draft banner */}
       {frontmatter.draft && (
-        <aside
-          role="status"
-          className="mb-6 flex items-center gap-2.5 rounded-md border border-amber-500/30 bg-amber-500/10 px-3.5 py-2.5 text-xs font-medium text-amber-800 dark:text-amber-200"
-        >
-          <AlertCircle className="size-4 shrink-0 text-amber-600 dark:text-amber-400" />
-          <span>
-            Draft post — this content is currently in development and visible in preview mode.
-          </span>
-        </aside>
-      )}
-
-      {/* Series indicator */}
-      {frontmatter.series?.title && (
-        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-neutral-100/60 dark:bg-neutral-900/60 px-3 py-1 text-xs text-neutral-600 dark:text-neutral-400">
-          <span className="font-medium text-neutral-900 dark:text-neutral-100">
-            {frontmatter.series.title}
-          </span>
-          {frontmatter.series.order !== undefined && (
-            <span>Part {frontmatter.series.order}</span>
-          )}
+        <div className="mb-6 flex items-center gap-2 rounded-md border border-amber-500/20 bg-amber-500/10 px-3 py-2 text-xs font-medium text-amber-600 dark:text-amber-400">
+          <AlertCircle className="size-4 shrink-0" />
+          <span>This post is a draft and is only visible in development or with draft mode enabled.</span>
         </div>
       )}
 
-      {/* Main title */}
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-950 dark:text-neutral-50 break-words">
+      {/* Title */}
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4 leading-tight">
         {frontmatter.title}
       </h1>
 
-      {/* Subtitle / Description */}
+      {/* Description */}
       {frontmatter.description && (
-        <p className="mt-4 text-base sm:text-lg leading-relaxed text-neutral-600 dark:text-neutral-400">
+        <p className="text-lg text-neutral-600 dark:text-neutral-400 mb-6 leading-relaxed">
           {frontmatter.description}
         </p>
       )}
 
-      {/* Metadata bar */}
-      <div className="mt-6 flex flex-wrap items-center gap-y-3 gap-x-6 text-xs text-neutral-500">
+      {/* Meta info */}
+      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-500">
         <div className="flex items-center gap-1.5">
           <User className="size-3.5" />
           <span>{frontmatter.author || "Ram Shankar"}</span>
@@ -116,11 +97,6 @@ export function BlogHeader({ post }: BlogHeaderProps) {
             </span>
           ))}
         </div>
-      )}
-
-      {/* Table of contents */}
-      {frontmatter.toc !== false && toc.length > 0 && (
-        <TableOfContents items={toc} />
       )}
     </header>
   );
