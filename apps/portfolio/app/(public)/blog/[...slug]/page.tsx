@@ -1,14 +1,12 @@
 import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  getAllPosts,
-  getPostBySlug,
-  loadPostComponent,
-  type MDXModule,
-} from "@workspace/writing";
+import { getPostBySlug } from "@workspace/writing";
+import { getBlogSource } from "@/lib/source";
+import { getMDXComponents } from "@/mdx-components";
 import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogFooter } from "@/components/blog/blog-footer";
+import { TableOfContents } from "@/components/blog/table-of-contents";
 
 interface PageProps {
   params: Promise<{
@@ -17,9 +15,9 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const posts = getAllPosts({ includeDrafts: true });
-  return posts.map((post) => ({
-    slug: post.slug,
+  const source = await getBlogSource();
+  return source.getPages().map((page) => ({
+    slug: page.slugs,
   }));
 }
 
@@ -83,32 +81,15 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  // Load the compiled MDX module from @workspace/writing
-  let mdxModule: MDXModule | null = await loadPostComponent(post.slugPath);
+  const source = await getBlogSource();
+  const page = source.getPage(slug);
 
-  // Fallback to dynamic import if not found in static registry
-  if (!mdxModule) {
-    try {
-      mdxModule = (await import(
-        `@workspace/writing/content/${post.slugPath}.mdx`
-      )) as unknown as MDXModule;
-    } catch {
-      try {
-        mdxModule = (await import(
-          `@workspace/writing/content/${post.slugPath}/index.mdx`
-        )) as unknown as MDXModule;
-      } catch (err) {
-        console.error(`Failed to load MDX component for ${post.slugPath}:`, err);
-        notFound();
-      }
-    }
-  }
-
-  if (!mdxModule) {
+  if (!page) {
     notFound();
   }
 
-  const PostComponent = mdxModule.default;
+  const { render } = await page.data.load();
+  const { body } = await render(getMDXComponents());
 
   // Generate JSON-LD Schema.org structured data
   const jsonLd = {
@@ -128,6 +109,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       name: "Ram Shankar",
       url: "https://ram.codes",
     },
+    url: `https://ram.codes${post.permalink}`,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `https://ram.codes${post.permalink}`,
@@ -141,10 +123,13 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <article className="w-full">
+      <article className="w-full relative">
         <BlogHeader post={post} />
+        {post.frontmatter.toc !== false && post.toc.length > 0 && (
+          <TableOfContents items={post.toc} />
+        )}
         <div className="prose-content">
-          <PostComponent />
+          {body}
         </div>
         <BlogFooter slugPath={post.slugPath} />
       </article>

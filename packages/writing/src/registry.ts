@@ -7,55 +7,16 @@ export interface MDXModule {
   frontmatter?: Record<string, unknown>;
 }
 
-export const postRegistry: Record<string, () => Promise<MDXModule>> = {
-  welcome: () =>
-    import("../content/welcome.mdx") as unknown as Promise<MDXModule>,
-  "learn-react": () =>
-    import("../content/learn-react/index.mdx") as unknown as Promise<MDXModule>,
-  "learn-react/learning-hooks/use-context": () =>
-    import(
-      "../content/learn-react/learning-hooks/use-context.mdx"
-    ) as unknown as Promise<MDXModule>,
-  "learn-react/learning-hooks/use-state": () =>
-    import(
-      "../content/learn-react/learning-hooks/use-state.mdx"
-    ) as unknown as Promise<MDXModule>,
-  "aws-cloud-practitioner": () =>
-    import(
-      "../content/aws-cloud-practitioner.mdx"
-    ) as unknown as Promise<MDXModule>,
-  "fullstack-resources": () =>
-    import(
-      "../content/fullstack-resources.mdx"
-    ) as unknown as Promise<MDXModule>,
-  "multiple-github-account": () =>
-    import(
-      "../content/multiple-github-account.mdx"
-    ) as unknown as Promise<MDXModule>,
-  "novice-to-sql-pro": () =>
-    import("../content/novice-to-sql-pro.mdx") as unknown as Promise<MDXModule>,
-  "please-learn-git": () =>
-    import("../content/please-learn-git.mdx") as unknown as Promise<MDXModule>,
-  "react-hooks": () =>
-    import("../content/react-hooks.mdx") as unknown as Promise<MDXModule>,
-  uses: () => import("../content/uses.mdx") as unknown as Promise<MDXModule>,
-  "using-free-oracle-compute": () =>
-    import(
-      "../content/using-free-oracle-compute.mdx"
-    ) as unknown as Promise<MDXModule>,
-};
+/**
+ * @deprecated MDX rendering is now handled by Fumadocs (@fumadocs/local-md).
+ */
+export const postRegistry: Record<string, () => Promise<MDXModule>> = {};
 
+/**
+ * @deprecated MDX rendering is now handled by Fumadocs (@fumadocs/local-md).
+ */
 export async function loadPostComponent(
-  slugPath: string,
+  _slugPath: string,
 ): Promise<MDXModule | null> {
-  const loader = postRegistry[slugPath];
-  if (loader) {
-    try {
-      return await loader();
-    } catch (err) {
-      console.error(`Failed to load MDX for slug "${slugPath}":`, err);
-      return null;
-    }
-  }
   return null;
 }
