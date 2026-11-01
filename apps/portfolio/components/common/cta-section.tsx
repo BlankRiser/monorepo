@@ -44,12 +44,13 @@ export const CtaSection = () => {
 
   return (
     <motion.section
+      id="contact"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
       className={cn([
-        "relative overflow-hidden rounded-2xl",
+        "relative scroll-mt-24 overflow-hidden rounded-2xl",
         "border border-neutral-200/80 dark:border-neutral-800/80",
         "bg-neutral-100/60 dark:bg-neutral-900/40",
         "p-6 sm:p-10 md:p-12",

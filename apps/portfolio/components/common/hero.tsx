@@ -91,9 +91,12 @@ export const Hero = (props: HeroProps) => {
         </div>
 
         <div className="flex flex-col items-start gap-1 sm:items-end">
-          <span className="rounded-md border border-neutral-200/80 bg-neutral-100/70 px-2.5 py-1 text-xs text-neutral-700 dark:border-neutral-800/80 dark:bg-neutral-900/60 dark:text-neutral-300">
+          <a
+            href="#contact"
+            className="rounded-md border border-neutral-200/80 bg-neutral-100/70 px-2.5 py-1 text-xs text-neutral-700 transition-colors hover:border-neutral-300 hover:bg-neutral-200/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2 focus-visible:ring-offset-background dark:border-neutral-800/80 dark:bg-neutral-900/60 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-800/70 dark:focus-visible:ring-emerald-300"
+          >
             Available for contracts and consulting
-          </span>
+          </a>
           <span className="text-xs text-neutral-500 dark:text-neutral-400">
             Bengaluru, India (UTC+5:30)
           </span>

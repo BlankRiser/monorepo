@@ -102,7 +102,6 @@ pre code span {
 
 .box-mesh-background {
   pointer-events: none;
-  contain: layout style;
 }
 
 /* 1. Fixed architectural wireframe grid:

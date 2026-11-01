@@ -3,8 +3,10 @@ import { Footer } from "@/components/common/footer";
 import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 import { Providers } from "@/components/providers";
 import { createOgMetadata } from "@/lib/og-metadata";
+import { projects, works } from "@workspace/data";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { PortfolioCommandLink } from "@/components/common/portfolio-command-bar";
 import "@workspace/ui/globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -14,6 +16,56 @@ const defaults = {
   name: "ram.codes",
   description: "Portfolio of Ram Shankar",
 };
+
+const portfolioLinks: PortfolioCommandLink[] = [
+  { label: "Home", href: "/", group: "Pages", description: "Portfolio home" },
+  { label: "About", href: "/about", group: "Pages", description: "Background and approach" },
+  { label: "Work", href: "/work", group: "Pages", description: "Selected roles and case studies" },
+  { label: "Writing", href: "/blog", group: "Pages", description: "Articles and engineering notes", keywords: "/writing" },
+  { label: "Uses", href: "/uses", group: "Pages", description: "Tools and development setup" },
+  { label: "Contact", href: "/contact", group: "Pages", description: "Get in touch" },
+  ...works.flatMap((work) => [
+    {
+      label: work.company,
+      href: `/work/${work.slug}`,
+      group: "Work",
+      description: work.brief || work.description,
+      keywords: `${work.role} ${work.position} ${work.year} ${work.technologies.join(" ")} ${work.tags.join(" ")}`,
+    },
+    {
+      label: `${work.company} website`,
+      href: work.url,
+      group: "Work sites",
+      description: `Visit ${work.company}`,
+      keywords: `${work.role} ${work.position}`,
+    },
+  ]),
+  ...projects.flatMap((project) => [
+    {
+      label: project.label,
+      href: project.url,
+      group: "Projects",
+      description: project.description,
+    },
+    ...(project.github
+      ? [{
+          label: `${project.label} source code`,
+          href: project.github,
+          group: "Code",
+          description: `GitHub repository for ${project.label}`,
+        }]
+      : []),
+  ]),
+  { label: "Resume", href: "https://bio.ram.codes/resume", group: "Elsewhere", description: "Read my resume" },
+  { label: "GitHub profile", href: "https://github.com/BlankRiser", group: "Elsewhere", description: "Repositories and open-source work" },
+  { label: "All repositories", href: "https://github.com/BlankRiser?tab=repositories", group: "Elsewhere", description: "Browse every public repository" },
+  { label: "npm packages", href: "https://www.npmjs.com/~devhaven", group: "Elsewhere", description: "Packages published as DevHaven" },
+  { label: "spendsmart.quest", href: "https://www.spendsmart.quest/", group: "Projects", description: "SpendSmart project" },
+  { label: "Email Ram", href: "mailto:ramshankar.codes@gmail.com", group: "Contact", description: "Send an email" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/ram-shankar-choudhary/", group: "Profiles", description: "Professional profile" },
+  { label: "X", href: "https://x.com/Blank_Riser", group: "Profiles", description: "Follow on X" },
+  { label: "Bluesky", href: "https://bsky.app/profile/otheos.bsky.social", group: "Profiles", description: "Follow on Bluesky" },
+];
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ram.codes"),
@@ -188,7 +240,7 @@ export default function RootLayout({
         <Providers>
           <>
             {children}
-            <PortfolioCommandBar />
+            <PortfolioCommandBar links={portfolioLinks} />
             <Footer />
           </>
         </Providers>

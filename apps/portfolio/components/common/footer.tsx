@@ -134,7 +134,7 @@ export function Footer(props: FooterProps) {
           <Link href="/work" className={footerLinkClass}>
             Work
           </Link>
-          <Link href="/writing" className={footerLinkClass}>
+          <Link href="/blog" className={footerLinkClass}>
             Writing
           </Link>
           <Link href="/contact" className={footerLinkClass}>

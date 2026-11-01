@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { BlogPostMeta } from "@workspace/writing";
 import { AlertCircle, Calendar, Clock, User } from "lucide-react";
+import { BlogPageActions } from "@/components/blog/blog-page-actions";
 
 interface BlogHeaderProps {
   post: BlogPostMeta;
@@ -9,6 +10,14 @@ interface BlogHeaderProps {
 
 export function BlogHeader({ post }: BlogHeaderProps) {
   const { frontmatter, slug, readingTime } = post;
+  const extension = post.filePath.endsWith(".md") ? "md" : "mdx";
+  const sourcePath = post.isSeriesRoot
+    ? `${post.slugPath}/index.${extension}`
+    : `${post.slugPath}.${extension}`;
+  const sourceUrl = `https://github.com/BlankRiser/monorepo/blob/main/packages/writing/content/${sourcePath
+    .split("/")
+    .map(encodeURIComponent)
+    .join("/")}`;
 
   // Build breadcrumb segments
   const breadcrumbs = [
@@ -35,7 +44,8 @@ export function BlogHeader({ post }: BlogHeaderProps) {
       <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-1.5 text-xs text-neutral-500">
         {breadcrumbs.map((crumb, index) => (
           <React.Fragment key={crumb.href}>
-            {index > 0 && <span className="text-neutral-300 dark:text-neutral-700">/</span>}\n            <Link
+            {index > 0 && <span className="text-neutral-300 dark:text-neutral-700">/</span>}
+            <Link
               href={crumb.href}
               className="hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors"
             >
@@ -69,35 +79,41 @@ export function BlogHeader({ post }: BlogHeaderProps) {
         </p>
       )}
 
-      {/* Meta info */}
-      <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-500">
-        <div className="flex items-center gap-1.5">
-          <User className="size-3.5" />
-          <span>{frontmatter.author || "Ram Shankar"}</span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <Calendar className="size-3.5" />
-          <time dateTime={frontmatter.date}>{formattedDate}</time>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <Clock className="size-3.5" />
-          <span>{readingTime.text}</span>
-        </div>
-      </div>
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+        <div className="min-w-0 space-y-3">
+          {/* Meta info */}
+          <div className="flex flex-wrap items-center gap-4 text-xs text-neutral-500">
+            <div className="flex items-center gap-1.5">
+              <User className="size-3.5" />
+              <span>{frontmatter.author || "Ram Shankar"}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Calendar className="size-3.5" />
+              <time dateTime={frontmatter.date}>{formattedDate}</time>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Clock className="size-3.5" />
+              <span>{readingTime.text}</span>
+            </div>
+          </div>
 
-      {/* Tags */}
-      {frontmatter.tags && frontmatter.tags.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {frontmatter.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 px-2 py-0.5 text-[11px] font-medium text-neutral-600 dark:text-neutral-400 lowercase"
-            >
-              #{tag}
-            </span>
-          ))}
+          {/* Tags */}
+          {frontmatter.tags && frontmatter.tags.length > 0 && (
+            <div className="flex flex-wrap gap-1.5">
+              {frontmatter.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 px-2 py-0.5 text-[11px] font-medium text-neutral-600 dark:text-neutral-400 lowercase"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
-      )}
+
+        <BlogPageActions sourceUrl={sourceUrl} />
+      </div>
     </header>
   );
 }

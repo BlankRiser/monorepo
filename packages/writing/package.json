@@ -12,6 +12,7 @@
     }
   },
   "dependencies": {
+    "fuse.js": "^7.5.0",
     "gray-matter": "^4.0.3"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getAllPosts } from "@workspace/writing";
 import { ArrowRight, BookOpen, Calendar, Clock } from "lucide-react";
 import { createOgMetadata } from "@/lib/og-metadata";
+import { BlogPageActions } from "@/components/blog/blog-page-actions";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -45,6 +46,9 @@ export default function BlogIndexPage() {
           Essays, architectural studies, and technical notes on systems design,
           interface engineering, and modular web foundations.
         </p>
+        <div className="pt-2">
+          <BlogPageActions sourceUrl="https://github.com/BlankRiser/monorepo/tree/main/packages/writing/content" />
+        </div>
       </section>
 
       {/* Series Section */}

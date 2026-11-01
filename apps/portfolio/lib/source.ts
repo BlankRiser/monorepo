@@ -122,6 +122,12 @@ export const projectDocs = localMd({
   ...markdownOptions,
 });
 
+export const usesDocs = localMd({
+  dir: path.resolve(resolveContentDir(), "../uses"),
+  frontmatterSchema: pageSchema,
+  ...markdownOptions,
+});
+
 export const blogSource = dynamicLoader(blogDocs.dynamicSource(), {
   baseUrl: "/blog",
 });
@@ -136,4 +142,12 @@ export const projectSource = dynamicLoader(projectDocs.dynamicSource(), {
 
 export async function getProjectSource() {
   return projectSource.get();
+}
+
+export const usesSource = dynamicLoader(usesDocs.dynamicSource(), {
+  baseUrl: "/uses",
+});
+
+export async function getUsesSource() {
+  return usesSource.get();
 }

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import Fuse from "fuse.js";
 import type {
   BlogPostFrontmatter,
   BlogPostMeta,
@@ -188,6 +189,77 @@ export function getAllPosts({
       new Date(b.frontmatter.date).getTime() -
       new Date(a.frontmatter.date).getTime()
     );
+  });
+}
+
+export interface BlogSearchResult {
+  title: string;
+  description: string;
+  permalink: string;
+  series?: string;
+  snippet: string;
+  tags: string[];
+}
+
+export function searchBlogPosts(query: string, limit = 8): BlogSearchResult[] {
+  const normalizedQuery = query.trim().toLowerCase().slice(0, 200);
+  if (!normalizedQuery) return [];
+
+  const documents = getAllPosts().map((post) => {
+    const raw = fs.readFileSync(post.filePath, "utf8");
+    const { content } = matter(raw);
+    const searchableContent = content
+        .replace(/```[\s\S]*?```/g, " ")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+        .replace(/[#>*_~`|]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    return { post, content: searchableContent };
+  });
+
+  const fuse = new Fuse(documents, {
+    keys: [
+      { name: "post.frontmatter.title", weight: 2 },
+      { name: "post.frontmatter.description", weight: 1.5 },
+      { name: "post.frontmatter.series.title", weight: 1.2 },
+      { name: "post.frontmatter.tags", weight: 1.1 },
+      { name: "post.permalink", weight: 0.6 },
+      { name: "content", weight: 0.8 },
+    ],
+    threshold: 0.34,
+    ignoreLocation: true,
+    includeMatches: true,
+    includeScore: true,
+    minMatchCharLength: 2,
+    useTokenSearch: true,
+    tokenMatch: "all",
+    tokenize: (text) =>
+      text
+        .toLowerCase()
+        .match(/[\p{L}\p{M}\p{N}_]+/gu)
+        ?.map((term) => term.slice(0, 32)) ?? [],
+  });
+
+  return fuse.search(normalizedQuery, { limit }).map(({ item, matches }) => {
+    const contentMatch = matches?.find((entry) => entry.key === "content");
+    const matchIndex = contentMatch?.indices[0]?.[0];
+    const snippetStart = Math.max(0, (matchIndex ?? 0) - 72);
+    let snippet = matchIndex === undefined
+      ? ""
+      : item.content.slice(snippetStart, snippetStart + 200);
+    if (snippetStart > 0 && snippet) snippet = `…${snippet}`;
+    if (snippetStart + 200 < item.content.length && snippet) snippet = `${snippet}…`;
+
+    return {
+      title: item.post.frontmatter.title,
+      description: item.post.frontmatter.description,
+      permalink: item.post.permalink,
+      series: item.post.frontmatter.series?.title,
+      snippet,
+      tags: item.post.frontmatter.tags ?? [],
+    };
   });
 }
 
