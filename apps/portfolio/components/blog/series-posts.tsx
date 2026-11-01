@@ -20,7 +20,7 @@ export function SeriesPosts({
 
   // If none or not provided, get posts with matching series or current path
   if (posts.length === 0) {
-    const all = getAllPosts({ includeDrafts: true });
+    const all = getAllPosts();
     // Filter posts that are in series
     posts = all.filter((p) => !p.isSeriesRoot && p.slug.length > 1);
   }

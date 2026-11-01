@@ -2,7 +2,9 @@ import { BoxMeshBackground } from "@/components/common/box-mesh-background";
 import { Footer } from "@/components/common/footer";
 import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 import { Providers } from "@/components/providers";
+import { createOgMetadata } from "@/lib/og-metadata";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@workspace/ui/globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -27,6 +29,7 @@ export const metadata: Metadata = {
     "typescript",
     "aws",
   ],
+  ...createOgMetadata({ title: defaults.name, description: defaults.description }),
   openGraph: {
     siteName: defaults.name,
     type: "website",
@@ -34,14 +37,7 @@ export const metadata: Metadata = {
     url: "https://ram.codes",
     title: defaults.name,
     description: defaults.description,
-    images: [
-      {
-        url: "https://ram.codes/thumbnail.webp",
-        width: 1600,
-        height: 900,
-        alt: "ram.codes",
-      },
-    ],
+    images: createOgMetadata({ title: defaults.name, description: defaults.description }).openGraph?.images,
   },
   twitter: {
     card: "summary_large_image",
@@ -49,14 +45,7 @@ export const metadata: Metadata = {
     description: defaults.description,
     creator: "@blank_riser",
     site: "@blank_riser",
-    images: [
-      {
-        url: "https://ram.codes/thumbnail.webp",
-        width: 1200,
-        height: 630,
-        alt: "ram.codes",
-      },
-    ],
+    images: createOgMetadata({ title: defaults.name, description: defaults.description }).twitter?.images,
   },
   robots: {
     index: true,
@@ -204,6 +193,7 @@ export default function RootLayout({
           </>
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

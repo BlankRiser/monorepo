@@ -1,12 +1,13 @@
 import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPostBySlug } from "@workspace/writing";
+import { getAllPosts, getPostBySlug } from "@workspace/writing";
 import { getBlogSource } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogFooter } from "@/components/blog/blog-footer";
 import { TableOfContents } from "@/components/blog/table-of-contents";
+import { createOgMetadata } from "@/lib/og-metadata";
 
 interface PageProps {
   params: Promise<{
@@ -15,10 +16,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const source = await getBlogSource();
-  return source.getPages().map((page) => ({
-    slug: page.slugs,
-  }));
+  return getAllPosts().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
@@ -35,17 +33,23 @@ export async function generateMetadata({
 
   const { frontmatter, permalink } = post;
   const canonicalUrl = `https://ram.codes${permalink}`;
-  const ogImage = frontmatter.coverImage || "https://ram.codes/thumbnail.webp";
+  const og = createOgMetadata({
+    title: frontmatter.title,
+    description: frontmatter.description,
+    section: frontmatter.series?.title,
+  });
 
   return {
     title: frontmatter.title,
     description: frontmatter.description,
     authors: [{ name: frontmatter.author || "Ram Shankar" }],
     keywords: frontmatter.tags,
+    ...og,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
+      ...og.openGraph,
       title: frontmatter.title,
       description: frontmatter.description,
       type: "article",
@@ -54,20 +58,12 @@ export async function generateMetadata({
       modifiedTime: frontmatter.updatedAt || frontmatter.date,
       authors: [frontmatter.author || "Ram Shankar"],
       tags: frontmatter.tags,
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: frontmatter.title,
-        },
-      ],
     },
     twitter: {
+      ...og.twitter,
       card: "summary_large_image",
       title: frontmatter.title,
       description: frontmatter.description,
-      images: [ogImage],
       creator: "@blank_riser",
     },
   };

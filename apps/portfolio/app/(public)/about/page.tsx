@@ -3,11 +3,18 @@ import { buttonVariants } from "@workspace/ui/components/button";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { createOgMetadata } from "@/lib/og-metadata";
 
 export const metadata: Metadata = {
   title: "About",
   description:
     "How Ram Shankar Choudhary got here, what he works on, and what he values in software.",
+  ...createOgMetadata({
+    title: "Ram Shankar Choudhary",
+    description:
+      "How Ram Shankar Choudhary got here, what he works on, and what he values in software.",
+    section: "About",
+  }),
 };
 
 const recentRole = works.find((work) => work.slug === "synoptic");

@@ -120,8 +120,7 @@ function formatDateString(value: unknown): string {
 }
 
 export function getAllPosts({
-  includeDrafts = process.env.NODE_ENV !== "production" ||
-    process.env.SHOW_DRAFTS === "true",
+  includeDrafts = process.env.NODE_ENV !== "production",
 }: {
   includeDrafts?: boolean;
 } = {}): BlogPostMeta[] {
@@ -200,13 +199,13 @@ export function getPostBySlug(
     : slugParam.split("/").filter(Boolean);
   const targetPath = slugArray.join("/");
 
-  const allPosts = getAllPosts({ includeDrafts: true });
+  const allPosts = getAllPosts();
   const matched = allPosts.find((p) => p.slugPath === targetPath);
   return matched || null;
 }
 
 export function getChildPosts(seriesSlugPath: string): BlogPostMeta[] {
-  const allPosts = getAllPosts({ includeDrafts: true });
+  const allPosts = getAllPosts();
   const prefix = seriesSlugPath ? `${seriesSlugPath}/` : "";
   return allPosts
     .filter(
@@ -238,7 +237,7 @@ export function getSeriesNavigation(
   }
 
   const seriesRootPath = currentSlug.slice(0, -1).join("/");
-  const allSeriesPosts = getAllPosts({ includeDrafts: true })
+  const allSeriesPosts = getAllPosts()
     .filter((p) => {
       if (currentPost.frontmatter.series?.title) {
         return (

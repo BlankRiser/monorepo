@@ -1,11 +1,18 @@
 import { buttonVariants } from "@workspace/ui/components/button";
 import { ArrowUpRight, Clock3, Mail, MapPin } from "lucide-react";
 import type { Metadata } from "next";
+import { createOgMetadata } from "@/lib/og-metadata";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
     "Get in touch with Ram Shankar Choudhary about product engineering, consulting, or a project.",
+  ...createOgMetadata({
+    title: "Contact Ram Shankar Choudhary",
+    description:
+      "Get in touch with Ram Shankar Choudhary about product engineering, consulting, or a project.",
+    section: "Contact",
+  }),
 };
 
 const email = "ramshankar.codes@gmail.com";

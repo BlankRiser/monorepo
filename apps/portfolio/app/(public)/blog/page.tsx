@@ -3,35 +3,33 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllPosts } from "@workspace/writing";
 import { ArrowRight, BookOpen, Calendar, Clock } from "lucide-react";
+import { createOgMetadata } from "@/lib/og-metadata";
 
 export const metadata: Metadata = {
   title: "Writing",
   description:
     "Engineering notes, system architecture, and deep-dive technical articles by Ram Shankar.",
+  ...createOgMetadata({
+    title: "Writing",
+    description:
+      "Engineering notes, system architecture, and deep-dive technical articles by Ram Shankar.",
+  }),
   alternates: {
     canonical: "https://ram.codes/blog",
   },
   openGraph: {
-    title: "Writing | ram.codes",
-    description:
-      "Engineering notes, system architecture, and deep-dive technical articles by Ram Shankar.",
+    ...createOgMetadata({
+      title: "Writing",
+      description:
+        "Engineering notes, system architecture, and deep-dive technical articles by Ram Shankar.",
+    }).openGraph,
     url: "https://ram.codes/blog",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Writing | ram.codes",
-    description:
-      "Engineering notes, system architecture, and deep-dive technical articles by Ram Shankar.",
   },
 };
 
 export default function BlogIndexPage() {
-  const posts = getAllPosts({
-    includeDrafts:
-      process.env.NODE_ENV !== "production" ||
-      process.env.SHOW_DRAFTS === "true",
-  });
+  const posts = getAllPosts();
 
   // Group into series roots
   const seriesRoots = posts.filter((p) => p.isSeriesRoot);

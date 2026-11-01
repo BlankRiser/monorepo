@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { WorkDetailClient } from "./work-detail-client";
 import { getProjectSource } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
+import { createOgMetadata } from "@/lib/og-metadata";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -31,6 +32,11 @@ export async function generateMetadata({
   return {
     title: work.company,
     description: work.description,
+    ...createOgMetadata({
+      title: work.company,
+      description: work.description,
+      section: "Selected work",
+    }),
   };
 }
 
