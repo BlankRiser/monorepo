@@ -1,6 +1,6 @@
-import { localMd } from "@fumadocs/local-md";
+import { localMd, type LocalMarkdownConfig } from "@fumadocs/local-md";
 import { dynamicLoader } from "fumadocs-core/source";
-import { pageSchema } from "fumadocs-core/source/schema";
+import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
 import {
   remarkMdxMermaid,
   rehypeCode,
@@ -46,7 +46,10 @@ function resolveContentDir(): string {
   return path.resolve(process.cwd(), "../../packages/writing/content");
 }
 
-const markdownOptions = {
+const markdownOptions: Pick<
+  LocalMarkdownConfig<typeof blogPostSchema, typeof metaSchema>,
+  "mdxOptions" | "mdOptions"
+> = {
   mdxOptions: {
     remarkPlugins: [remarkMath, remarkMdxMermaid],
     rehypeCodeOptions: false,

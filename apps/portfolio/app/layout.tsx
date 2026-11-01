@@ -2,6 +2,7 @@ import { BoxMeshBackground } from "@/components/common/box-mesh-background";
 import { Footer } from "@/components/common/footer";
 import { PortfolioCommandBar } from "@/components/common/portfolio-command-bar";
 import { Providers } from "@/components/providers";
+import { Analytics } from "@vercel/analytics/next";
 import "@workspace/ui/globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -202,6 +203,7 @@ export default function RootLayout({
             <Footer />
           </>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );
