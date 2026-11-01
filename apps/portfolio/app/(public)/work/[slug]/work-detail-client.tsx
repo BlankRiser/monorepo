@@ -11,12 +11,14 @@ import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import type { ReactNode } from "react";
 
 type WorkDetailClientProps = {
   work: Work;
+  caseStudyContent?: ReactNode;
 };
 
-export function WorkDetailClient({ work }: WorkDetailClientProps) {
+export function WorkDetailClient({ work, caseStudyContent }: WorkDetailClientProps) {
   const [ditherActive, setDitherActive] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
@@ -38,6 +40,8 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
       ? "Full-Time Engineering"
       : work.position === "Freelance"
         ? "Freelance Engagement"
+        : work.position === "Internship"
+          ? "Internship"
         : "Contract Development";
 
   return (
@@ -322,6 +326,11 @@ export function WorkDetailClient({ work }: WorkDetailClientProps) {
           </div>
         </motion.section>
       </div>
+      {caseStudyContent && (
+        <section className="prose-content" aria-label="Project case study">
+          {caseStudyContent}
+        </section>
+      )}
       <motion.footer
         initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}

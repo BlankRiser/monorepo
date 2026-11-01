@@ -2,7 +2,7 @@ export type Work = {
   year: number;
   role: string;
   slug: string;
-  position: "FTE" | "Freelance" | "Contract";
+  position: "FTE" | "Freelance" | "Contract" | "Internship";
   tags: Array<string>;
   company: string;
   description: string;
@@ -68,19 +68,24 @@ export const works: Array<Work> = [
     position: "Freelance",
     tags: [],
     company: "Konnect",
-    description: `Assisting in development of a platform for AR based applications.`,
-    brief: "Built full-stack web platform powering interactive AR learning experiences.",
-    keyDetails: [""],
+    description: `Konnect is an education and career-guidance platform connecting students, schools, and families. I worked across its student and school portals, building career assessment and guidance flows alongside school administration tools for student records, report cards, events, and parent access.`,
+    brief: "Two connected portals for student career guidance and school operations, built around the goal of connecting learning to future opportunities.",
+    keyDetails: [
+      "Built features across the student and school portals in a shared monorepo.",
+      "Implemented a repeatable career assessment flow with AI-assisted career recommendations informed by student responses and academic data.",
+      "Added school workflows for student records, report cards, events, parent associations, and bulk data entry.",
+      "Worked with the client through demos, recorded walkthroughs, live testing, and iterative feedback to refine the phase-one product.",
+    ],
     url: "https://www.konnectedu.tech/?ref=ram.codes",
     image: "/images/work/konnect.png",
     technologies: [
       "next",
-      "material-ui",
       "tailwind",
-      "javascript",
       "typescript",
       "react-query",
-      "graphql",
+      "convex",
+      "workos",
+      "openrouter",
       "zod",
     ],
   },
@@ -222,13 +227,18 @@ export const works: Array<Work> = [
   {
     year: 2021,
     slug: "cosmic-zoom",
-    role: "Frontend Developer",
-    position: "Freelance",
-    tags: [],
+    role: "Junior Engineer",
+    position: "Internship",
+    tags: ["Science communication", "Exhibition", "Education"],
     company: "CosmicZoom.in",
-    description: `Developed an e-commerce platform to international customers.`,
-    brief: "Developed international e-commerce platform with automated catalog management.",
-    url: "https://potion-inc.io/?ref=ram.codes",
+    description: `Helped design and develop Cosmic Zoom, ICTS-TIFR's online exhibition exploring the spatial scales of the Universe, from the very small to the very large.`,
+    brief: "Built the web experience for an online science exhibition, working with scientists, exhibition planners, illustrators, and motion designers.",
+    keyDetails: [
+      "Contributed web design and development as a junior engineer during an ICTS-TIFR internship.",
+      "Helped translate a science-curation concept into an interactive, scale-based visitor journey.",
+      "Collaborated with exhibition designers, scientists, content contributors, illustrators, and animation designers.",
+    ],
+    url: "https://bash.ram.codes",
     image: "/images/work/cosmic-zoom.png",
     technologies: [
       "create-react-app",
@@ -247,7 +257,7 @@ export const works: Array<Work> = [
     company: "Nabler Web Solutions Pvt Ltd",
     description: `Built ETL pipelines and dashboards using Amazon Quicksight.`,
     brief: "Engineered cloud ETL data pipelines and business intelligence dashboards.",
-    url: "https://potion-inc.io/?ref=ram.codes",
+    url: "https://www.nabler.com/?ref=ram.codes",
     image: "/images/work/nabler.png",
     technologies: [
       "python",

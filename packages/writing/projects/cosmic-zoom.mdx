@@ -1,0 +1,127 @@
+---
+title: "Cosmic Zoom: designing a journey across the scales of the Universe"
+description: "A case study of my internship as a junior engineer helping design and develop ICTS-TIFR's Cosmic Zoom online science exhibition."
+date: "2026-11-01"
+author: "Ram Shankar"
+tags: ["Internship", "Science communication", "Exhibition design", "React"]
+toc: true
+---
+
+## Project overview
+
+Cosmic Zoom was an online science exhibition organized by the International Centre for Theoretical Sciences (ICTS-TIFR), Bengaluru. It invited visitors to travel through the spatial scales of the Universe, from subatomic particles to the observable cosmos, and to notice connections between worlds that are usually studied separately.
+
+I joined ICTS as a junior engineer intern, working with exhibition designers, scientists, event planners, illustrators, and motion designers. My contribution was web design and development: helping turn the curatorial idea into an online experience people could explore. The original `cosmic-zoom.in` domain is no longer the reliable way to access the exhibition; a [backup of the experience is available here](https://bash.ram.codes), with team credits on its [About page](https://bash.ram.codes/about).
+
+## Problem and exhibition context
+
+The exhibition needed to make enormous differences in scale understandable and inviting to a broad audience. Visitors were meant to move from the very small to the very large, encountering scientific ideas across physics, astronomy, biology, ecology, and other fields along the way.
+
+The work was also part of a public outreach effort during the COVID-19 pandemic, when in-person exhibitions and events were difficult to run. ICTS described Cosmic Zoom as a virtual exhibition and a curtain-raiser for the proposed Bengaluru Science Habba. The online format made it possible to combine an explorable exhibition with a program of talks, workshops, and conversations.
+
+## Understanding requirements
+
+My offer letter described an internship in exhibition design, working with primary mentors Samhitha Kotamasu and Juny Wilfred and a wider team of scientists and designers. The exhibition’s core idea was to explore the spatial scales of the Universe. The website therefore had to support the visitor journey as well as the material created by the curatorial and creative teams.
+
+The project’s needs included:
+
+- Presenting a clear journey between smaller and larger scales, so visitors could understand where they were and what to explore next.
+- Making scientific material approachable to a wide audience, including school students and university students.
+- Supporting rich visual storytelling created by illustrators and animation designers.
+- Connecting exhibition content with related online events and supporting information.
+- Working remotely and coordinating decisions across a distributed, interdisciplinary team during the pandemic.
+
+These points describe the product needs evident from the exhibition and the internship brief. The available records do not include a formal engineering specification or a detailed task log for my individual contributions.
+
+## Project timeline
+
+The offer letter proposed a nominal two-month internship, extendable by up to one month based on performance. It does not specify the exact start or end date. ICTS records the public launch of Cosmic Zoom on March 28, 2021; its 2020–21 activity report describes a three-week exhibition with 17 online events.
+
+- **Internship start:** Joined the exhibition team remotely as a junior engineer, with exhibition design mentors and a cross-disciplinary group.
+- **Design and development:** Helped shape and implement the web experience alongside the curatorial, science, illustration, and motion design work.
+- **Public exhibition:** The online exhibition launched in March 2021 and ran alongside a program of virtual events.
+
+## Planning and design
+
+The central design challenge was to make scale itself a navigation idea. The archived experience includes pages for subjects such as subatomic particles, atoms, cells, insects, Earth, the Solar System, stars, galaxies, and the cosmic microwave background. Navigation links let visitors move between smaller and larger scales, turning the exhibition’s scientific theme into a way to explore the site.
+
+This required coordination between the structure of the website and the story being told by the content. Scientists and science communicators shaped the information; illustrators and motion designers developed the visual material; and the web experience had to bring those pieces together in an understandable sequence. I worked on the implementation side with the exhibition design team, rather than authoring or independently curating the scientific content.
+
+## Tech and stack
+
+The existing portfolio record identifies the website as a React application built with Create React App, with Tailwind CSS and Framer Motion. It also lists Nginx and Google Drive API among the project technologies. I have retained those recorded technologies as the available stack description; I do not have a source repository or deployment configuration that would let me verify their exact use or reconstruct the production setup.
+
+- **Frontend:** React and Create React App
+- **Styling and motion:** Tailwind CSS and Framer Motion, as recorded in the project entry
+- **Hosting or delivery:** Nginx, as recorded in the project entry
+- **Content integration:** Google Drive API, as recorded in the project entry
+
+The archived site’s source bundle confirms that the deployed visitor experience was a client-rendered React application. The bundle alone does not establish the original source structure or how every listed service was used.
+
+## Implementation and key features
+
+The website organized content as an exploratory journey through progressively different scales. Visitors could enter at a subject and continue to smaller or larger topics, including from the Solar System toward stars and galaxies, or from cells toward atoms and subatomic particles.
+
+The broader exhibition connected the scale journey to a wide range of research and public engagement topics. ICTS describes content and events spanning astronomy, particle physics, quantum phenomena, cell biology, forests, extraterrestrial life, climate, insects, marine life, and ecology. The archived site also includes an events destination alongside the exhibition pages.
+
+My role was junior engineer on web design and development. I helped build the website that carried this exhibition experience and worked alongside the specialists responsible for curation, science, exhibition design, graphics, and animation.
+
+## Technical challenges and solutions
+
+### Making scale navigable
+
+The exhibition spans an enormous conceptual range, so an ordinary list of pages would not communicate its organizing idea. The site’s smaller/larger navigation made scale an explicit part of movement through the content. This is an interpretation of the design visible in the archived experience, rather than a documented engineering decision record.
+
+### Bringing science and visual storytelling together
+
+The site depended on content produced by a large cross-disciplinary group. The implementation needed to give scientific explanations, illustrations, and animations a coherent place in the same visitor journey. Collaboration with the exhibition designers and visual team helped align the web presentation with the exhibition’s intended narrative.
+
+### Supporting remote, cross-disciplinary work
+
+The offer letter was issued during the COVID-19 pandemic and explicitly offered remote work until normal campus operations resumed. Working with mentors, scientists, and designers remotely made shared references and clear iteration especially important. The source material does not preserve the specific tools or review cadence used by the team, so this describes the project constraint rather than a particular process claim.
+
+### Keeping an interactive exhibition accessible
+
+An online exhibition with visual material must work across screen sizes and allow visitors to understand how to continue through the content. Responsive layouts, clear topic navigation, and careful handling of visual assets are practical requirements inferred from the public experience. I cannot verify the original accessibility audit, browser support matrix, or performance budgets from the available records.
+
+## Deployment and CI/CD
+
+The exhibition was published online at `cosmic-zoom.in` and is now represented by the backup at [bash.ram.codes](https://bash.ram.codes). The current portfolio record lists Nginx in the technology stack, but I do not have deployment configuration or CI history to substantiate how builds were automated or how the original domain was hosted.
+
+The ICTS activity report confirms the exhibition launch in March 2021. The backup provides a way to revisit the client-side exhibition and the credits, but it should be understood as an archive of the experience rather than evidence that the original service and infrastructure remain active.
+
+## Client and team collaboration
+
+The internship placed me within a team where the website was one part of a larger exhibition. I worked alongside event planners, scientists, exhibition designers, illustrators, and motion designers, translating a shared science communication goal into a web experience.
+
+The archived About page credits the team by discipline. It names Ajith Parameswaran for concept and curation; Samhitha Kottamasu for exhibition design; Juny K. Wilfred for graphic and animation design; and Ram Shankar Choudhary for web design and development. It also credits a wider group for graphics and animation, writing, content contributions, editing, and curation. These attributions are part of the project’s collaborative outcome, not claims that I performed those other disciplines.
+
+## Performance, testing, and optimization
+
+The visitor experience relied on a client-rendered React application and a substantial body of visual and scientific content. In this setting, clear page transitions, legible layouts, sensible asset loading, and usable navigation are important quality concerns. The live backup makes it possible to inspect the experience, but there are no preserved performance measurements, test reports, or optimization records in the materials available for this case study.
+
+I therefore describe the experience and the engineering constraints without assigning unverified Lighthouse scores, audience metrics, or individual optimization work. The ICTS activity report documents the exhibition and event program; it does not provide a direct measurement of website performance.
+
+## Final result and outcome
+
+Cosmic Zoom launched as an online exhibition that took visitors across the scales of the Universe and paired the exhibition with a multi-week public program. ICTS reports that it was designed for a broad audience, from schoolchildren to university students, and that its three-week program included 17 events.
+
+My contribution was to help design and develop the website as a junior engineer, within a team of scientists, designers, and science communicators. The result brought research content and visual storytelling into an explorable digital exhibition. The available materials do not isolate my individual output or quantify the effect of the website on attendance, so those outcomes are attributed to the overall exhibition rather than to my work alone.
+
+## Lessons learned and takeaways
+
+- Let the subject shape the interface. Here, the scale of the Universe became the navigation model, helping the site express its central idea through interaction.
+- Treat collaboration as part of implementation. The quality of a science exhibition depends on how well the web experience supports curatorial, scientific, editorial, and visual work.
+- Design for the audience’s first question: where am I, and what can I explore next? Clear relationships between neighboring topics help visitors make sense of a large content space.
+- Plan around media and content production early. Illustrations, animation, scientific review, and event information all affect how pages are structured and delivered.
+- Keep attribution visible. A multidisciplinary exhibition is a collective result, and clear credits give proper context to an individual engineering contribution.
+
+## Project credits and references
+
+- **Concept and curation:** Ajith Parameswaran
+- **Exhibition design:** Samhitha Kottamasu
+- **Graphic and animation design:** Juny K. Wilfred
+- **Web design and development:** Ram Shankar Choudhary
+- **Additional graphics and animation:** Kartik Chati, Nathan Calisto Gomes, Samhitha Kottamasu, and Juny K. Wilfred
+
+Project details and public context are available from the [archived exhibition](https://bash.ram.codes), its [About and credits page](https://bash.ram.codes/about), and [ICTS-TIFR’s exhibition announcement](https://www.icts.res.in/news/icts-launches-virtual-exhibition-cosmiczoom). The [ICTS Cosmic Zoom page](https://www.icts.res.in/lectures/cosmic-zoom) describes the exhibition and its related events.

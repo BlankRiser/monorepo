@@ -46,9 +46,7 @@ function resolveContentDir(): string {
   return path.resolve(process.cwd(), "../../packages/writing/content");
 }
 
-export const blogDocs = localMd({
-  dir: resolveContentDir(),
-  frontmatterSchema: blogPostSchema,
+const markdownOptions = {
   mdxOptions: {
     remarkPlugins: [remarkMath, remarkMdxMermaid],
     rehypeCodeOptions: false,
@@ -107,6 +105,18 @@ export const blogDocs = localMd({
       ],
     ],
   },
+};
+
+export const blogDocs = localMd({
+  dir: resolveContentDir(),
+  frontmatterSchema: blogPostSchema,
+  ...markdownOptions,
+});
+
+export const projectDocs = localMd({
+  dir: path.resolve(resolveContentDir(), "../projects"),
+  frontmatterSchema: blogPostSchema,
+  ...markdownOptions,
 });
 
 export const blogSource = dynamicLoader(blogDocs.dynamicSource(), {
@@ -115,4 +125,12 @@ export const blogSource = dynamicLoader(blogDocs.dynamicSource(), {
 
 export async function getBlogSource() {
   return blogSource.get();
+}
+
+export const projectSource = dynamicLoader(projectDocs.dynamicSource(), {
+  baseUrl: "/work",
+});
+
+export async function getProjectSource() {
+  return projectSource.get();
 }

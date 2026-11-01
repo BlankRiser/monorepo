@@ -1,0 +1,141 @@
+---
+title: "Konnect: connecting student potential with opportunity"
+description: "A freelance case study of the student and school portals built for Konnect Edu-Tech, an education platform focused on career guidance and student support."
+date: "2026-11-01"
+author: "Ram Shankar"
+tags: ["Freelance", "Education", "Next.js", "Convex", "Career guidance"]
+toc: true
+---
+
+## Project overview
+
+Konnect Edu-Tech is building a data-informed education ecosystem to help young people connect learning with future opportunities. Its public site describes a goal of connecting students to universities, employers, and funding opportunities, with career guidance as an early part of that journey.
+
+I worked as a freelance full-stack developer on two connected products: the [student portal](https://student.konnectedu.tech/) and the [school portal](https://school.konnectedu.tech/). The work combined a student career assessment and AI-assisted recommendations with day-to-day school workflows for student records, report cards, school events, and parent access.
+
+This case study describes the phase-one product and the development work reflected in the project repository and client collaboration. It does not claim user growth or measured business impact: the available project records document features, review, testing, and launch preparation rather than post-launch analytics.
+
+## Problem and business context
+
+Students can have difficulty translating their interests and school performance into concrete career directions. At the same time, schools need a practical way to maintain student information and help families stay connected to academic progress. Konnect’s broader ambition was to connect those early signals to future education and employment opportunities.
+
+The initial product therefore had two related jobs: give students a guided route to explore potential careers, and give schools tools to manage the student information and communication that could support that guidance. This was an early product build, so requirements and operational details were still being clarified while implementation was underway.
+
+## Understanding requirements
+
+The client’s Canva mockups and discussions provided a starting point, then weekly conversations helped turn assumptions into product rules. Early alignment covered brand colors, assessment content, sign-up, and whether the student and school experiences should share the same assessment platform.
+
+Requirements that became clear during delivery included:
+
+- Students sign up before taking an assessment, and can take it more than once, subject to a monthly attempt limit.
+- Schools create an account or join a school. A school must be verified by the Konnect team before it is treated as trusted.
+- School staff manage student records and academic data; students and parents need access to the relevant student-facing information.
+- Career recommendations should take both assessment responses and academic context into account.
+- The interface should follow Konnect’s brand, with green as the initial direction, and assessment language should be understandable to students in a range of school contexts.
+
+The project also surfaced important questions about permissions, parent relationships, duplicate student identities, student transfers, downloadable reports, and who could create or verify schools. These discussions shaped implementation and exposed decisions that should be made explicit in any later phase.
+
+## Project timeline
+
+The repository history begins on November 26, 2025, with the first student and school portal foundations. Work continued through the client’s phase-one reviews in early 2026, with further integration, testing, and deployment discussions appearing in the chat through June 2026.
+
+- **November–December 2025:** Set up the monorepo, portal layouts, authentication, and the first career assessment flow; shared preview deployments for review.
+- **January 2026:** Expanded assessment results, role-specific experiences, school events, and teacher access to student assessment results; demonstrated progress in recorded walkthroughs and meetings.
+- **February 2026:** Added report-card workflows, bulk uploads, parent access, and tighter school staff permissions; addressed feedback and clarified what was included in phase one.
+- **March 2026:** Prepared production domains, carried out client-led test passes, fixed issues found in real flows, and worked through account, AI response, and domain configuration concerns.
+- **April–June 2026:** The chat records continued support around production testing, school onboarding, school verification, and DNS configuration.
+
+These dates describe the work visible in the repository and project communications; they are not a claim that every feature was continuously available in production throughout that period.
+
+## Planning and design
+
+I started with the client’s existing mockups and brand direction, then shared working preview URLs so stakeholders could react to real flows early. The team confirmed green as the initial visual direction for consistency with the public site. When the available logo file proved too small for production use, the design collaborator recreated it as a high-resolution transparent asset and vector SVG.
+
+The two-portal structure reflected different tasks. Students needed an approachable route through sign-up, assessment, and results. School staff needed dashboard views and forms for maintaining students, families, academic records, and events. Parent access then connected the student experience to family oversight. Walkthrough videos and calls helped the client review flows even when meeting availability varied.
+
+## Tech and stack
+
+The product is a TypeScript monorepo using Turborepo and pnpm, with two Next.js applications: the student portal and the school portal. Both use React and shared UI packages.
+
+- **Application:** Next.js 16, React 19, TypeScript, Tailwind CSS 4
+- **Backend and data:** Convex for application data, queries, mutations, actions, and file storage
+- **Authentication:** WorkOS AuthKit, with OAuth support and Convex identity integration
+- **Client data:** TanStack Query, including the Convex integration
+- **Forms and validation:** React Hook Form and Zod
+- **AI:** Vercel AI SDK with OpenRouter as the provider for generated career guidance
+- **Hosting:** Vercel for the two web applications, with dedicated student and school subdomains
+
+This is the stack reflected in the local repository and project setup notes. AI model selection was discussed as an operational choice because response quality, latency, and cost depended on the model and the amount of student context sent with a structured output request.
+
+## Implementation and key features
+
+### Student portal
+
+The student experience includes account onboarding, school association, a career assessment, saved assessment history, and results with career suggestions. The assessment can use academic inputs, including report-card data, as part of its recommendation context. Students can revisit the assessment within the configured monthly limit. The project also added dashboard access to report cards and upcoming school events.
+
+### School portal
+
+The school experience supports school creation and joining, student record management, report-card entry and bulk import, school event management, and visibility into student assessment results. Student records include school identifiers and parent contact details, while school-facing access rules govern who can add or delete records.
+
+### Parents and access boundaries
+
+Parent access evolved during delivery from a request into support for parents associated with students, including multiple parent contacts and multiple children. The portals distinguish student, parent, teacher, and administrator journeys. The implementation added role-aware protected layouts and more limited operations for school staff, such as restricting student deletion to administrators.
+
+## Technical challenges and solutions
+
+### Coordinating two portals with a shared backend
+
+Student and staff actions touch related records but require different views and permissions. Keeping the portals in one monorepo with shared packages and a Convex backend made it possible to evolve the flows together. Role checks and school association became essential to keeping each view scoped to the right user and institution.
+
+### Authentication, roles, and school trust
+
+The client raised a valid concern that an unverified person could create a school. The phase-one workflow retained school creation but placed school verification with the Konnect team, enforced through backend state. This was an operational verification model, not automated identity proofing, so it required clear administration and follow-up.
+
+### AI generation quality and latency
+
+Career results depended on sending assessment and academic context to a language model and receiving structured output. During testing, generation could be slow, fail to produce a result, or include artifacts such as unsupported extra curriculum details. The team discussed switching to a paid model and comparing providers for output quality, latency, and input/output cost. Model behavior remained a dependency to validate under production credentials and representative data.
+
+### Identity and school membership edge cases
+
+Testing surfaced confusion when an email was already associated with a student or another school, and around how a student moves between schools. The product enforced unique roll numbers within a school, and the team clarified that departing students should be removed from the previous school before re-association. Cross-school discovery was avoided to protect school data and prevent expensive global lookups.
+
+### Integration and deployment issues
+
+Client testing found cases where an assessment did not advance to results, parent associations did not appear as expected, and event registrations were not reflected consistently across portals. Some reported issues were caused by testing an outdated deployment. Moving the apps onto client-controlled accounts and connecting the custom subdomains also required coordination across Vercel, authentication configuration, and DNS providers; the chat records conflicting DNS entries between Afrihost and Wix.
+
+## Deployment and CI/CD
+
+Both applications were first shared through Vercel preview deployments so the client could review them while work was in progress. The project was later prepared for the production subdomains `student.konnectedu.tech` and `school.konnectedu.tech`.
+
+Production setup involved more than deploying the front end: the Convex deployment, WorkOS client credentials and webhook, OpenRouter configuration, redirect URLs, and DNS records all had to agree. The client was asked to create and control vendor accounts so production credentials and paid AI usage could live under Konnect’s ownership. The chat documents deployment coordination and live testing; it does not provide a formal CI pipeline description or independently verified uptime figures.
+
+## Client collaboration
+
+I used chat discussions to confirm assumptions, ask for content and brand assets, share preview links, and explain current product behavior. I shared recorded walkthroughs as an asynchronous review format, then used client calls and comments to resolve questions such as whether teachers should see the assessment summary or full answers, how parents should access their children’s information, and how school verification should work.
+
+Client testing was particularly useful once the platform had realistic account data. It revealed mismatches between expected and actual flows, including parent access, assessment completion, event visibility, and student-school membership. The work also expanded beyond the original phase-one outline; the team explicitly discussed how to handle extra scope and phase boundaries.
+
+## Performance, testing, and optimization
+
+The project was tested through developer walkthroughs, client-created accounts, real portal flows, and a client-provided test plan. The repository history shows fixes for authentication checks, build failures, redirects, data visibility, validation, and CSV import errors. The client arranged additional professional testing before phase-one handover.
+
+Assessment generation was the main performance-sensitive feature because response time and output depended on the selected language model and the size of its input context. Model comparison and paid-provider configuration were discussed as optimization work. No benchmark numbers or formal load-test results are available in the project records, so performance improvements should be evaluated with measured production traces rather than inferred from implementation alone.
+
+## Final result and outcome
+
+The phase-one result was a deployed pair of connected portals: students could register, complete career assessments, and view guidance alongside school information; school teams could manage students, report cards, and events, with parent access included in the evolving role model. The client reviewed the product through demos and live testing, and the team prepared for school onboarding.
+
+The work established an end-to-end product foundation for Konnect’s larger education and opportunity vision. The project records show a working product and active testing, but do not establish adoption, learning outcomes, or business impact after launch. Areas requiring continued operational attention included AI reliability, school verification, account and school transfer procedures, and production support during onboarding.
+
+## Lessons learned and takeaways
+
+- Confirm role and ownership rules early. School creation, verification, teacher permissions, parent access, and student transfers affect the data model and user experience across both portals.
+- Put realistic, multi-role test scenarios in place before launch. Testing only a school-linked student missed some independent student and parent edge cases.
+- Treat AI output as a variable dependency. Structured prompts help, but model selection, cost, latency, and output validation need explicit testing and monitoring.
+- Give clients a repeatable way to review current deployments. Walkthroughs and test plans helped, while outdated deployments made feedback harder to diagnose.
+- Plan domain and vendor ownership as part of delivery. DNS, OAuth redirect URLs, backend deployments, webhooks, and AI credentials need a coordinated handover.
+- Make scope and handover criteria visible. Features added during collaboration can exceed the original phase; agree on acceptance checks, documentation, and support boundaries as the work grows.
+
+---
+
+**Project links:** [Konnect Edu-Tech](https://www.konnectedu.tech/) · [Student portal](https://student.konnectedu.tech/) · [School portal](https://school.konnectedu.tech/)

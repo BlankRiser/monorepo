@@ -1,7 +1,10 @@
 import { works } from "@workspace/data";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
 import { WorkDetailClient } from "./work-detail-client";
+import { getProjectSource } from "@/lib/source";
+import { getMDXComponents } from "@/mdx-components";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -39,5 +42,25 @@ export default async function WorkPage({ params }: PageProps) {
     notFound();
   }
 
-  return <WorkDetailClient work={work} />;
+  let caseStudyContent: ReactNode = null;
+
+  const caseStudySlug =
+    work.slug === "konnect" || work.slug === "cosmic-zoom"
+      ? work.slug
+      : null;
+
+  if (caseStudySlug) {
+    const source = await getProjectSource();
+    const page = source.getPage([caseStudySlug]);
+
+    if (page) {
+      const { render } = await page.data.load();
+      const rendered = await render(getMDXComponents());
+      caseStudyContent = rendered.body;
+    }
+  }
+
+  return (
+    <WorkDetailClient work={work} caseStudyContent={caseStudyContent} />
+  );
 }

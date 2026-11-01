@@ -5,7 +5,10 @@ import { type HTMLMotionProps, motion, useReducedMotion } from "motion/react";
 import { WorkItem } from "./work-item";
 
 const contractWorks = works.filter(
-  (work) => work.position === "Freelance" || work.position === "Contract",
+  (work) =>
+    work.position === "Freelance" ||
+    work.position === "Contract" ||
+    work.position === "Internship",
 );
 
 type ContractSectionProps = HTMLMotionProps<"section">;
@@ -28,7 +31,7 @@ export const ContractSection = (props: ContractSectionProps) => {
     >
       <div className="flex flex-col gap-3">
         <h2 className="text-lg font-medium text-neutral-900 dark:text-neutral-100">
-          Contract Work
+          Freelance, Contract & Internship Work
         </h2>
 
         <div className="flex flex-col gap-0.5">
